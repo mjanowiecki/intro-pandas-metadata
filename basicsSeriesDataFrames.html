@@ -1,0 +1,1252 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. Basics of Series and DataFrames &#8212; Workshop: Pandas for Metadata Transformation and Cleanup</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Clean up with pandas" href="basicCleanup.html" />
+    <link rel="prev" title="Workshop home" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Workshop: Pandas for Metadata Transformation and Cleanup</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Workshop home
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. Basics of
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Series
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     DataFrames
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basicCleanup.html">
+   2. Clean up with pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basicMerging.html">
+   3. Merge with pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reshaping.html">
+   4. Reshape with pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cheatsheet.html">
+   Cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="additionalResources.html">
+   Additional resources
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/basicsSeriesDataFrames.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/mjanowiecki/intro-python-pandas-metadata"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mjanowiecki/intro-python-pandas-metadata/master?urlpath=tree/docs/basicsSeriesDataFrames.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pandas-documentation">
+   pandas documentation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-a-dataframe">
+   What is a
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     DataFrame
+    </span>
+   </code>
+   ?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-a-series">
+   What is a
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Series
+    </span>
+   </code>
+   ?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#make-a-dataframe">
+   Make a
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     DataFrame
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#view-your-dataframe">
+   View your
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     DataFrame
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#access-a-row">
+   Access a row
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#access-a-series">
+   Access a Series
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#access-a-specific-cell">
+   Access a specific cell
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-descriptive-stats">
+   Get descriptive stats
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>1. Basics of Series and DataFrames</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pandas-documentation">
+   pandas documentation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-a-dataframe">
+   What is a
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     DataFrame
+    </span>
+   </code>
+   ?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-a-series">
+   What is a
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Series
+    </span>
+   </code>
+   ?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#make-a-dataframe">
+   Make a
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     DataFrame
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#view-your-dataframe">
+   View your
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     DataFrame
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#access-a-row">
+   Access a row
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#access-a-series">
+   Access a Series
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#access-a-specific-cell">
+   Access a specific cell
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-descriptive-stats">
+   Get descriptive stats
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="basics-of-series-and-dataframes">
+<span id="basics-df"></span><h1>1. Basics of <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code><a class="headerlink" href="#basics-of-series-and-dataframes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="pandas-documentation">
+<h2>pandas documentation<a class="headerlink" href="#pandas-documentation" title="Permalink to this headline">¶</a></h2>
+<p>First, I want to give you a quick tour of the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/index.html">pandas documentation website</a>. This documentation is essential to using pandas and I refer back to it literally all the time.</p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html">pandas User Guide</a>: The User Guide covers all of pandas by topic area. Each of the subsections introduces a topic (such as “working with missing data”), and discusses how pandas approaches the problem, with many examples throughout.</p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/index.html">pandas API reference</a>: This page gives an overview of all public pandas objects, functions and methods.</p>
+</div>
+<div class="section" id="what-is-a-dataframe">
+<h2>What is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>?<a class="headerlink" href="#what-is-a-dataframe" title="Permalink to this headline">¶</a></h2>
+<p>There are two main concepts that are essential to using pandas.</p>
+<p>The first important concept is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. In pandas, a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> is a table of data organized and accessed by <strong>rows</strong> and <strong>columns</strong>. In many ways, it is equivalent to a basic spreadsheet or CSV file. Here’s a visual of what our sampleData.csv looks like as a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
+<div class="important admonition">
+<p class="admonition-title">Files</p>
+<p>You can <a class="reference download internal" download="" href="_downloads/d1ecd53e8246279e1f8361cdfdc3aac9/sampleData.csv"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">sampleData.csv</span> <span class="pre">here</span></code></a>.</p>
+</div>
+<a class="reference internal image-reference" href="_images/dataframe.jpg"><img alt="Visual of DataFrame" class="align-left" src="_images/dataframe.jpg" style="width: 2000px;" /></a>
+<p><strong>Indexes:</strong>
+By default, pandas assigns an <code class="docutils literal notranslate"><span class="pre">index</span></code> to every row and every column in a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">index</span></code> (position) is an integer that starts at 0 and counts up.</p>
+<ul class="simple">
+<li><p>50 rows → row index from 0 to 49</p></li>
+<li><p>10 columns → column index from 0 to 9</p></li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">index</span></code> is used generically, it refers to the row index rather than the column index.</p>
+</div>
+<p>For rows, the <code class="docutils literal notranslate"><span class="pre">index</span></code> is typically identical to the row label, but sometimes people change the <code class="docutils literal notranslate"><span class="pre">index</span></code> or row labels to be strings or letters.</p>
+<ul class="simple">
+<li><p>10 rows → row index from A to J</p></li>
+</ul>
+<p><strong>Labels:</strong></p>
+<ul class="simple">
+<li><p>Column labels correspond to the name of each column. They are typically a string, but can be numbers too.</p></li>
+<li><p>Most of the time, column labels of a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> are equivalent to the “column headers” (or first row) seen in most spreadsheet editors.</p></li>
+<li><p>For 4th column in our <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, the column index is <code class="docutils literal notranslate"><span class="pre">3</span></code> while the column label is “creator”.</p></li>
+</ul>
+</div>
+<div class="section" id="what-is-a-series">
+<h2>What is a <code class="docutils literal notranslate"><span class="pre">Series</span></code>?<a class="headerlink" href="#what-is-a-series" title="Permalink to this headline">¶</a></h2>
+<p>The second important concept is a <code class="docutils literal notranslate"><span class="pre">Series</span></code>. In pandas, a <code class="docutils literal notranslate"><span class="pre">Series</span></code> is equivalent to a column in a CSV or spreadsheet. <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> are composed of 2 or more <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Series</span></code> also have a row index or label. Here is an example of a <code class="docutils literal notranslate"><span class="pre">Series</span></code> (or column) named “title” from sampleData.csv.</p>
+<a class="reference internal image-reference" href="_images/series.png"><img alt="Visual of DataFrame" class="align-left" src="_images/series.png" style="width: 1000px;" /></a>
+</div>
+<div class="section" id="make-a-dataframe">
+<h2>Make a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code><a class="headerlink" href="#make-a-dataframe" title="Permalink to this headline">¶</a></h2>
+<p>To use pandas, we need to import the library. Typically, pandas is abbreviated as <code class="docutils literal notranslate"><span class="pre">pd</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s use the pandas function <code class="docutils literal notranslate"><span class="pre">read_csv()</span></code> to read sampleData.csv into a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function    </p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html"><code class="docutils literal notranslate"><span class="pre">pd.read_csv()</span></code></a>: Reads a CSV file into a DataFrame.</p>
+</div>
+<p>Let’s give our resulting <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> the commonly used variable name <code class="docutils literal notranslate"><span class="pre">df</span></code>, although we could call it whatever we want. Let’s also print <code class="docutils literal notranslate"><span class="pre">df</span></code> to see what it looks like in the terminal.</p>
+<div class="cell tag_hide-output tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;sampleData.csv&#39;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    item_identifier                   advisor                    creator  \
+0               1.0        Wolberger, Cynthia          Daniels, Casey M.   
+1               2.0  Fallin, Margaret Daniele   Collado Torres, Leonardo   
+2               3.0  Neelon, Sara E. Benjamin        Caswell, Bess L. L.   
+3               4.0           Roter, Debra L.               Jamal, Leila   
+4               5.0          Sears, Cynthia L              Rouhani, Saba   
+..              ...                       ...                        ...   
+85             86.0           Spall, James  C               Chen, Tianyi   
+86             87.0              Dredze, Mark             Benton, Adrian   
+87             87.0              Dredze, Mark             Benton, Adrian   
+88             88.0       Andreou, Andreas  G      Fischl, Kate Danielle   
+89             89.0            Shpitser, Ilya  Nabi Abdolyousefi, Razieh   
+
+   date_issued                                              title  \
+0   2015-07-31  Characterization of the ADP-ribosylated proteo...   
+1   2016-07-25  Annotation-Agnostic Differential Expression an...   
+2   2016-09-07  Child diet over three seasons in rural Zambia:...   
+3   2017-02-02  Exploring Parental Involvement in Rare Disease...   
+4   2018-05-23  Gut Microbes, Enteropathy and Child Growth: Th...   
+..         ...                                                ...   
+85  2018-08-20  A Fast Reduced-Space Algorithmic Framework for...   
+86  2018-10-25     Learning Representations of Social Media Users   
+87  2018-10-25     Learning Representations of Social Media Users   
+88  2019-05-13  Neuromorphic Models of the Amygdala with Appli...   
+89  2021-03-29  Causal Inference Methods For Bias Correction I...   
+
+                        degree_discipline  \
+0                            Biochemistry   
+1                           Biostatistics   
+2                         Human Nutrition   
+3                               Bioethics   
+4   Global Disease Epidemiology &amp; Control   
+..                                    ...   
+85                            Mathematics   
+86                       Computer Science   
+87                       Computer Science   
+88                   Computer Engineering   
+89                       Computer Science   
+
+                                       degree_grantor  \
+0   Johns Hopkins University. Bloomberg School of ...   
+1   Johns Hopkins University. Bloomberg School of ...   
+2   Johns Hopkins University. Bloomberg School of ...   
+3   Johns Hopkins University. Bloomberg School of ...   
+4   Johns Hopkins University. Bloomberg School of ...   
+..                                                ...   
+85  Johns Hopkins University. Whiting School of En...   
+86  Johns Hopkins University. Whiting School of En...   
+87  Johns Hopkins University. Whiting School of En...   
+88  Johns Hopkins University. Whiting School of En...   
+89  Johns Hopkins University. Whiting School of En...   
+
+                      degree_department  \
+0    Biochemistry and Molecular Biology   
+1                         Biostatistics   
+2                  International Health   
+3          Health Policy and Management   
+4                  International Health   
+..                                  ...   
+85   Applied Mathematics and Statistics   
+86                     Computer Science   
+87                     Computer Science   
+88  Electrical and Computer Engineering   
+89                     Computer Science   
+
+                                     committee_member  contributor_author  
+0   Leung, Anthony K. L.|Matunis, Michael J.|Dingl...                 NaN  
+1   Leek, Jeffrey T.|Hansen, Kasper D.|Battle, Ale...                 NaN  
+2   West, Keith P., Jr.|Talegawkar, Sameera|Fanzo,...                 NaN  
+3   Kass, Nancy E.|Saloner, Brendan|Bodurtha, Joan...                 NaN  
+4   Kosek, Margaret  N|Dowdy, David W|Sack, David ...                 NaN  
+..                                                ...                 ...  
+85   Basu, Amitabh|Curtis, Frank E|Robinson, Daniel P                 NaN  
+86            Arora, Raman|Yarowsky, David|Hovy, Dirk                 NaN  
+87            Arora, Raman|Yarowsky, David|Hovy, Dirk                 NaN  
+88  Etienne-Cummings, Ralph|Sarma, Sridevi|Pouliqu...                 NaN  
+89  Scharfstein, Daniel|Tchetgen Tchetgen, Eric|Og...                 NaN  
+
+[90 rows x 10 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<p>While this doesn’t print out every row or column of df, it helps us see the overall structure of the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. pandas also has many useful functions to help get a closer look at your data. Let’s try some!</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_json.html"><code class="docutils literal notranslate"><span class="pre">pd.read_json()</span></code></a>: Converts a JSON string to a DataFrame or Series.</p>
+</div>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html"><code class="docutils literal notranslate"><span class="pre">pd.read_excel()</span></code></a>: Reads an Excel file into a DataFrame.</p>
+</div>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_sql.html"><code class="docutils literal notranslate"><span class="pre">pd.read_sql()</span></code></a>: Reads SQL database table into a DataFrame.</p>
+</div>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.from_dict.html"><code class="docutils literal notranslate"><span class="pre">pd.from_dict()</span></code></a>: Creates a  DataFrame from dictionary or an array of dictionaries.</p>
+</div>
+</div>
+<div class="section" id="view-your-dataframe">
+<h2>View your <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code><a class="headerlink" href="#view-your-dataframe" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it’s nice to get an overview of your data without having to scroll through a bunch of rows. <code class="docutils literal notranslate"><span class="pre">head()</span></code> and <code class="docutils literal notranslate"><span class="pre">tail()</span></code> are really great for this.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">head()</span></code> on your <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> to see the first 5 rows with column labels, and use <code class="docutils literal notranslate"><span class="pre">tail()</span></code> to see the last 5 rows with column labels. You can change the number of rows by putting a different value in the parentheses.</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html"><code class="docutils literal notranslate"><span class="pre">df.head()</span></code></a>: Returns the first n rows of the DataFrame.</p>
+</div>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.tail.html"><code class="docutils literal notranslate"><span class="pre">df.tail()</span></code></a>: Returns the last n rows of the DataFrame.</p>
+</div>
+<div class="cell tag_hide-output tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   item_identifier                   advisor                   creator  \
+0              1.0        Wolberger, Cynthia         Daniels, Casey M.   
+1              2.0  Fallin, Margaret Daniele  Collado Torres, Leonardo   
+2              3.0  Neelon, Sara E. Benjamin       Caswell, Bess L. L.   
+3              4.0           Roter, Debra L.              Jamal, Leila   
+4              5.0          Sears, Cynthia L             Rouhani, Saba   
+
+  date_issued                                              title  \
+0  2015-07-31  Characterization of the ADP-ribosylated proteo...   
+1  2016-07-25  Annotation-Agnostic Differential Expression an...   
+2  2016-09-07  Child diet over three seasons in rural Zambia:...   
+3  2017-02-02  Exploring Parental Involvement in Rare Disease...   
+4  2018-05-23  Gut Microbes, Enteropathy and Child Growth: Th...   
+
+                       degree_discipline  \
+0                           Biochemistry   
+1                          Biostatistics   
+2                        Human Nutrition   
+3                              Bioethics   
+4  Global Disease Epidemiology &amp; Control   
+
+                                      degree_grantor  \
+0  Johns Hopkins University. Bloomberg School of ...   
+1  Johns Hopkins University. Bloomberg School of ...   
+2  Johns Hopkins University. Bloomberg School of ...   
+3  Johns Hopkins University. Bloomberg School of ...   
+4  Johns Hopkins University. Bloomberg School of ...   
+
+                    degree_department  \
+0  Biochemistry and Molecular Biology   
+1                       Biostatistics   
+2                International Health   
+3        Health Policy and Management   
+4                International Health   
+
+                                    committee_member  contributor_author  
+0  Leung, Anthony K. L.|Matunis, Michael J.|Dingl...                 NaN  
+1  Leek, Jeffrey T.|Hansen, Kasper D.|Battle, Ale...                 NaN  
+2  West, Keith P., Jr.|Talegawkar, Sameera|Fanzo,...                 NaN  
+3  Kass, Nancy E.|Saloner, Brendan|Bodurtha, Joan...                 NaN  
+4  Kosek, Margaret  N|Dowdy, David W|Sack, David ...                 NaN  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-output tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    item_identifier                 advisor                    creator  \
+78             79.0  Chirikjian, Gregory S.    Ackerman, Martin Kendal   
+79             80.0        Prince, Jerry L.                 Uneri, Ali   
+80             81.0      Whitcomb, Louis L.           Bohren, Jonathan   
+81             82.0                     NaN              Tao, Lingling   
+82             83.0     Braverman, Vladimir                  Yang, Lin   
+83             84.0       Kazanzides, Peter                Chen, Zihan   
+84             85.0       Gayme, Dennice F.         Hameduddin, Ismail   
+85             86.0         Spall, James  C               Chen, Tianyi   
+86             87.0            Dredze, Mark             Benton, Adrian   
+87             87.0            Dredze, Mark             Benton, Adrian   
+88             88.0     Andreou, Andreas  G      Fischl, Kate Danielle   
+89             89.0          Shpitser, Ilya  Nabi Abdolyousefi, Razieh   
+
+   date_issued                                              title  \
+78  2016-02-18  Design and Calibration of Robotic Systems with...   
+79  2017-01-12  Imaging and registration for surgical guidance...   
+80  2017-01-26  Intent-Recognition-Based Traded Control for Te...   
+81  2017-02-26  Learning Discriminative Feature Representation...   
+82  2017-10-09                       Taming Big Data By Streaming   
+83  2017-10-27  A Scalable, High-Performance, Real-Time Contro...   
+84  2018-02-26                   Tackling viscoelastic turbulence   
+85  2018-08-20  A Fast Reduced-Space Algorithmic Framework for...   
+86  2018-10-25     Learning Representations of Social Media Users   
+87  2018-10-25     Learning Representations of Social Media Users   
+88  2019-05-13  Neuromorphic Models of the Amygdala with Appli...   
+89  2021-03-29  Causal Inference Methods For Bias Correction I...   
+
+         degree_discipline                                     degree_grantor  \
+78                Robotics  Johns Hopkins University. Whiting School of En...   
+79        Computer Science  Johns Hopkins University. Whiting School of En...   
+80                Robotics  Johns Hopkins University. Whiting School of En...   
+81        Computer Science  Johns Hopkins University. Whiting School of En...   
+82        Computer Science  Johns Hopkins University. Whiting School of En...   
+83        Computer Science  Johns Hopkins University. Whiting School of En...   
+84  Mechanical Engineering  Johns Hopkins University. Whiting School of En...   
+85             Mathematics  Johns Hopkins University. Whiting School of En...   
+86        Computer Science  Johns Hopkins University. Whiting School of En...   
+87        Computer Science  Johns Hopkins University. Whiting School of En...   
+88    Computer Engineering  Johns Hopkins University. Whiting School of En...   
+89        Computer Science  Johns Hopkins University. Whiting School of En...   
+
+                      degree_department  \
+78               Mechanical Engineering   
+79                     Computer Science   
+80               Mechanical Engineering   
+81  Electrical and Computer Engineering   
+82                     Computer Science   
+83                     Computer Science   
+84               Mechanical Engineering   
+85   Applied Mathematics and Statistics   
+86                     Computer Science   
+87                     Computer Science   
+88  Electrical and Computer Engineering   
+89                     Computer Science   
+
+                                     committee_member  contributor_author  
+78  Boctor, Emad M.|Shiffman, Bernard|Whitcomb, Lo...                 NaN  
+79  Siewerdsen, Jeffrey H.|Taylor, Russell H.|Woli...                 NaN  
+80                   Kazanzides, Peter|Leonard, Simon                 NaN  
+81  Vidal, Rene|Khudanpur, Sanjeev P.|Tran, Trac D...                 NaN  
+82  Szalay, Alexander S.|Priebe, Carey E.|Basu, Am...                 NaN  
+83              Taylor, Russell H.|Whitcomb, Louis L.                 NaN  
+84                Meneveau, Charles V.|Zaki, Tamer A.                 NaN  
+85   Basu, Amitabh|Curtis, Frank E|Robinson, Daniel P                 NaN  
+86            Arora, Raman|Yarowsky, David|Hovy, Dirk                 NaN  
+87            Arora, Raman|Yarowsky, David|Hovy, Dirk                 NaN  
+88  Etienne-Cummings, Ralph|Sarma, Sridevi|Pouliqu...                 NaN  
+89  Scharfstein, Daniel|Tchetgen Tchetgen, Eric|Og...                 NaN  
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pandas also offers many properties to understand your <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. Let’s try them out.</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.columns.html"><code class="docutils literal notranslate"><span class="pre">df.columns</span></code></a>: Returns the column labels of the DataFrame.</p>
+</div>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.shape.html"><code class="docutils literal notranslate"><span class="pre">df.shape</span></code></a>: Returns a tuple (rows, columns) representing the DataFrame.</p>
+</div>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.empty.html"><code class="docutils literal notranslate"><span class="pre">df.empty</span></code></a>: Indicates if the DataFrame is empty.</p>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;item_identifier&#39;, &#39;advisor&#39;, &#39;creator&#39;, &#39;date_issued&#39;, &#39;title&#39;,
+       &#39;degree_discipline&#39;, &#39;degree_grantor&#39;, &#39;degree_department&#39;,
+       &#39;committee_member&#39;, &#39;contributor_author&#39;],
+      dtype=&#39;object&#39;)
+(90, 10)
+False
+</pre></div>
+</div>
+</div>
+</div>
+<p>When we printed <code class="docutils literal notranslate"><span class="pre">df.columns</span></code>, we got a list of 10 column labels.</p>
+<p>When we printed <code class="docutils literal notranslate"><span class="pre">df.shape</span></code>, we got the result <code class="docutils literal notranslate"><span class="pre">(90,</span> <span class="pre">10)</span></code>. This means our <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> has 90 rows and 10 columns.</p>
+<p>When we printed <code class="docutils literal notranslate"><span class="pre">df.empty</span></code>, we got the result <code class="docutils literal notranslate"><span class="pre">False</span></code>. This means our <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> is NOT empty.</p>
+</div>
+<div class="section" id="access-a-row">
+<h2>Access a row<a class="headerlink" href="#access-a-row" title="Permalink to this headline">¶</a></h2>
+<p>There are two main way to access a row. The first is by using <code class="docutils literal notranslate"><span class="pre">.loc[]</span></code>, which grabs a row by its <strong>label</strong>.</p>
+<p>Typically, the index label is the same as the row integer (but not always, remember you can change the index labels to be anything you want). The default row index starts at 0, and counts up by 1. Let’s access the 11th row.</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html"><code class="docutils literal notranslate"><span class="pre">df.loc[]</span></code></a>: Access a group of rows and columns by label(s) or a boolean array.</p>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row_10</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">row_10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>item_identifier                                                    11.0
+advisor                                             Passey, Benjamin H.
+creator                                          Henkes, Gregory Arthur
+date_issued                                                  2014-09-22
+title                 Carbonate clumped isotope geochemistry of mari...
+degree_discipline                            Earth &amp; Planetary Sciences
+degree_grantor        Johns Hopkins University. Krieger School of Ar...
+degree_department                          Earth and Planetary Sciences
+committee_member                                         Ferry, John M.
+contributor_author                                                  NaN
+Name: 10, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>The second way to access a row is by using <code class="docutils literal notranslate"><span class="pre">.iloc[]</span></code>, which grabs a row by its <strong>integer</strong>.</p>
+<p>The row integer will remain the same regardless of your index labels. Rows integers always start at 0, and count up by 1. Let’s access the 11th row.</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html"><code class="docutils literal notranslate"><span class="pre">df.iloc[]</span></code></a>: Purely integer-location based indexing for selection by position.</p>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row_10</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">row_10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>item_identifier                                                    11.0
+advisor                                             Passey, Benjamin H.
+creator                                          Henkes, Gregory Arthur
+date_issued                                                  2014-09-22
+title                 Carbonate clumped isotope geochemistry of mari...
+degree_discipline                            Earth &amp; Planetary Sciences
+degree_grantor        Johns Hopkins University. Krieger School of Ar...
+degree_department                          Earth and Planetary Sciences
+committee_member                                         Ferry, John M.
+contributor_author                                                  NaN
+Name: 10, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also grab sections of rows using both of these functions. Guess what rows each function will bring up.<br></p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>These work a lot like list indexing!</p>
+</div>
+<div class="cell tag_hide-output tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">41</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    item_identifier              advisor                    creator  \
+30             31.0    Schleif, Robert F        Martens, Andrew Ted   
+31             32.0                  NaN                   You, Can   
+32             33.0       Poole, Deborah          Reyna, Zachary E.   
+33             34.0    Swartz, Morris L.                  Feng, Lei   
+34             35.0       Eyink, Gregory             Wang, Shengwen   
+35             36.0                  NaN  O&#39;Briain, Katarina Louisa   
+36             37.0           Bowen, Kit         Marquez, Sara Anne   
+37             38.0        Kaplan, Jared              Chen, Hongbin   
+38             39.0      Riess, Adam  G.            Huang, Caroline   
+39             40.0    Williams, Michael       Wilk, Thomas Michael   
+40             41.0  Nealon, Christopher       Huttner, Tobias Reed   
+
+   date_issued                                              title  \
+30  2017-07-19  Synonymous codons affect polysome spacing, pro...   
+31  2017-07-23  Higgs Boson Properties and Search for Addition...   
+32  2017-08-24  The Matter of Law: Reconsidering the Natural L...   
+33  2018-01-30  Measurement of t-tbar Forward-backward Asymmet...   
+34  2018-05-07  Some properties of closed hypersurfaces of sma...   
+35  2018-07-10  Trade Secrets: Georgic Poetry and the Rise of ...   
+36  2018-09-17  Experimental and Theoretical Explorations of A...   
+37  2019-07-05     On Black Hole Information Paradox in AdS3/CFT2   
+38  2019-09-25                            The Mira Distance Scale   
+39  2019-10-21  Metaethics for Neo-Pragmatists: A Pragmatic Ac...   
+40  2020-06-22  On Occasion: American Poetry at the Margins of...   
+
+    degree_discipline                                     degree_grantor  \
+30            Biology  Johns Hopkins University. Krieger School of Ar...   
+31            Physics  Johns Hopkins University. Krieger School of Ar...   
+32  Political Science  Johns Hopkins University. Krieger School of Ar...   
+33            Physics  Johns Hopkins University. Krieger School of Ar...   
+34        Mathematics  Johns Hopkins University. Krieger School of Ar...   
+35            English  Johns Hopkins University. Krieger School of Ar...   
+36          Chemistry  Johns Hopkins University. Krieger School of Ar...   
+37            Physics  Johns Hopkins University. Krieger School of Ar...   
+38            Physics  Johns Hopkins University. Krieger School of Ar...   
+39         Philosophy  Johns Hopkins University. Krieger School of Ar...   
+40            English  Johns Hopkins University. Krieger School of Ar...   
+
+        degree_department                                   committee_member  \
+30                Biology    Hilser, Vincent J|Green, Rachel|Roberts, Elijah   
+31  Physics and Astronomy  Gritsan, Andrei|Blumenfeld, Barry J.|Schlaufma...   
+32      Political Science  Culbert, Jennifer|Bennett, Jane|Connolly, Will...   
+33  Physics and Astronomy  Gritsan, Andrei|Schlaufman, Kevin C.|Lu, Fei|S...   
+34            Mathematics  Bernstein, Jacob|Kazhdan, Misha|Sogge, Christo...   
+35                English  Kramnick, Jonathan|Favret, Mary|Achinstein, Sh...   
+36              Chemistry                      Toscano, John|Townsend, Craig   
+37  Physics and Astronomy  Bah, Ibrahima|Basu, Amitabh|Kitchloo, Nitu|Li, Yi   
+38  Physics and Astronomy  Kamionkowski, Marc|Schlaufman, Kevin|Sabbi, El...   
+39             Philosophy  Bok, Hilary|Moyar, Dean|Lance, Mark|Egginton, ...   
+40                English  Hickman, Jared|Walters, Ronald G|Chambers, Sam...   
+
+    contributor_author  
+30                 NaN  
+31                 NaN  
+32                 NaN  
+33                 NaN  
+34                 NaN  
+35                 NaN  
+36                 NaN  
+37                 NaN  
+38                 NaN  
+39                 NaN  
+40                 NaN  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    item_identifier             advisor              creator date_issued  \
+0               1.0  Wolberger, Cynthia    Daniels, Casey M.  2015-07-31   
+30             31.0   Schleif, Robert F  Martens, Andrew Ted  2017-07-19   
+60             61.0        Tung, Leslie       Gorospe, Giann  2017-10-27   
+
+                                                title       degree_discipline  \
+0   Characterization of the ADP-ribosylated proteo...            Biochemistry   
+30  Synonymous codons affect polysome spacing, pro...                 Biology   
+60  Shape Theoretic and Machine Learning Based Met...  Biomedical Engineering   
+
+                                       degree_grantor  \
+0   Johns Hopkins University. Bloomberg School of ...   
+30  Johns Hopkins University. Krieger School of Ar...   
+60       Johns Hopkins University. School of Medicine   
+
+                     degree_department  \
+0   Biochemistry and Molecular Biology   
+30                             Biology   
+60              Biomedical Engineering   
+
+                                     committee_member  contributor_author  
+0   Leung, Anthony K. L.|Matunis, Michael J.|Dingl...                 NaN  
+30    Hilser, Vincent J|Green, Rachel|Roberts, Elijah                 NaN  
+60                        Vidal, Rene|Younes, Laurent                 NaN  
+</pre></div>
+</div>
+</div>
+</div>
+<p>❓ <strong>What’s up with the extra brackets in <code class="docutils literal notranslate"><span class="pre">df.iloc[[0,</span> <span class="pre">30,</span> <span class="pre">60]]</span></code></strong> ❓</p>
+<p>To make sure that the function is taking your list of rows as a list –not as 3 distinct parameters– you’ve got to put your values in a list bracket. The example below gives the same result, and hopefully helps to show how we get double brackets when putting a list in <code class="docutils literal notranslate"><span class="pre">.iloc[]</span></code>.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rowsToGrab</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">rowsToGrab</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    item_identifier             advisor              creator date_issued  \
+0               1.0  Wolberger, Cynthia    Daniels, Casey M.  2015-07-31   
+30             31.0   Schleif, Robert F  Martens, Andrew Ted  2017-07-19   
+60             61.0        Tung, Leslie       Gorospe, Giann  2017-10-27   
+
+                                                title       degree_discipline  \
+0   Characterization of the ADP-ribosylated proteo...            Biochemistry   
+30  Synonymous codons affect polysome spacing, pro...                 Biology   
+60  Shape Theoretic and Machine Learning Based Met...  Biomedical Engineering   
+
+                                       degree_grantor  \
+0   Johns Hopkins University. Bloomberg School of ...   
+30  Johns Hopkins University. Krieger School of Ar...   
+60       Johns Hopkins University. School of Medicine   
+
+                     degree_department  \
+0   Biochemistry and Molecular Biology   
+30                             Biology   
+60              Biomedical Engineering   
+
+                                     committee_member  contributor_author  
+0   Leung, Anthony K. L.|Matunis, Michael J.|Dingl...                 NaN  
+30    Hilser, Vincent J|Green, Rachel|Roberts, Elijah                 NaN  
+60                        Vidal, Rene|Younes, Laurent                 NaN  
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="access-a-series">
+<h2>Access a Series<a class="headerlink" href="#access-a-series" title="Permalink to this headline">¶</a></h2>
+<p>There are two main ways to access a specific column (also known as a <code class="docutils literal notranslate"><span class="pre">Series</span></code>) by its label in a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
+<ol class="simple">
+<li><p>Dot notation</p>
+<ul class="simple">
+<li><p>Uses the column label as a property of the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p></li>
+<li><p>Example: <code class="docutils literal notranslate"><span class="pre">df.column_name</span></code></p></li>
+</ul>
+</li>
+<li><p>Bracket notation</p>
+<ul class="simple">
+<li><p>Places column label string in brackets to select part of the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p></li>
+<li><p>Example: <code class="docutils literal notranslate"><span class="pre">df['column_name']</span></code></p></li>
+</ul>
+</li>
+</ol>
+<p>Let’s try both options.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">degree_discipline</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">degree_discipline</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">degree_discipline</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0                              Biochemistry
+1                             Biostatistics
+2                           Human Nutrition
+3                                 Bioethics
+4     Global Disease Epidemiology &amp; Control
+                      ...                  
+85                              Mathematics
+86                         Computer Science
+87                         Computer Science
+88                     Computer Engineering
+89                         Computer Science
+Name: degree_discipline, Length: 90, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">degree_discipline</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;degree_discipline&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">degree_discipline</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0                              Biochemistry
+1                             Biostatistics
+2                           Human Nutrition
+3                                 Bioethics
+4     Global Disease Epidemiology &amp; Control
+                      ...                  
+85                              Mathematics
+86                         Computer Science
+87                         Computer Science
+88                     Computer Engineering
+89                         Computer Science
+Name: degree_discipline, Length: 90, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>In most cases, both notations work equally well! Sometimes though, dot notation will fail. If that happens, just switch to bracket notation.</p>
+</div>
+<div class="section" id="access-a-specific-cell">
+<h2>Access a specific cell<a class="headerlink" href="#access-a-specific-cell" title="Permalink to this headline">¶</a></h2>
+<p>There are also a bunch of ways to look at a specific cell – here’s some!</p>
+<p>We can add a column label (2nd parameter value) to <code class="docutils literal notranslate"><span class="pre">.loc[]</span></code> to grab a cell value by its index label and column name.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;degree_discipline&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Spanish
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also add a column integer (second parameter value) to <code class="docutils literal notranslate"><span class="pre">.iloc[]</span></code> to grab a cell value by its row integer position and its column integer position.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>To figure out the integer of your column, start counting at 0 at the leftmost column.</p>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Spanish
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also use <code class="docutils literal notranslate"><span class="pre">iat[]</span></code> and <code class="docutils literal notranslate"><span class="pre">at[]</span></code> to view a single cell.</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.iat.html"><code class="docutils literal notranslate"><span class="pre">df.iat[]</span></code></a>: Access single value by index.</p>
+</div>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.at.html"><code class="docutils literal notranslate"><span class="pre">df.at[]</span></code></a>: Access single value by label.</p>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;degree_discipline&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Spanish
+Spanish
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="get-descriptive-stats">
+<h2>Get descriptive stats<a class="headerlink" href="#get-descriptive-stats" title="Permalink to this headline">¶</a></h2>
+<p>There are also many functions in pandas to get computational or descriptive stats about your Series or DataFrames. Here’s a quick look at my two favorites (check out the full lists for <a class="reference external" href="https://pandas.pydata.org/docs/reference/series.html#computations-descriptive-stats">Series</a> and <a class="reference external" href="https://pandas.pydata.org/docs/reference/frame.html#computations-descriptive-stats">DataFrames</a> here).</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/dev/reference/api/pandas.Series.unique.html"><code class="docutils literal notranslate"><span class="pre">df[].unique()</span></code></a>: Returns unique values of Series.</p>
+</div>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/dev/reference/api/pandas.Series.value_counts.html"><code class="docutils literal notranslate"><span class="pre">df[].value_counts()</span></code></a>: Returns Series containing counts of unique value in column.</p>
+</div>
+<div class="cell tag_hide-output tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">department_unique</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;degree_department&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">department_unique</span><span class="p">)</span>
+
+<span class="n">unique_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">department_unique</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unique_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Biochemistry and Molecular Biology&#39; &#39;Biostatistics&#39;
+ &#39;International Health&#39; &#39;Health Policy and Management&#39;
+ &#39;German and Romance Languages and Literatures&#39; &#39;Anthropology&#39;
+ &#39;Political Science&#39; &#39;Earth and Planetary Sciences&#39; &#39;Sociology&#39;
+ &#39;Chemistry&#39; &#39;Physics and Astronomy&#39; &#39;Mathematics&#39; &#39;Chemical Biology&#39;
+ &#39;Biology&#39; &#39;History&#39; &#39;English&#39; &#39;Philosophy&#39;
+ &#39;Psychological and Brain Sciences&#39; &#39;Molecular Biology and Genetics&#39;
+ &#39;Neuroscience&#39; nan &#39;Oncology&#39; &#39;Biomedical Engineering&#39;
+ &#39;Functional Anatomy and Evolution&#39;
+ &#39;Biochemistry, Cellular and Molecular Biology&#39;
+ &#39;McKusick-Nathans Institute of Genetic Medicine&#39; &#39;Biological Chemistry&#39;
+ &#39;Cellular and Molecular Medicine&#39; &#39;Physiology&#39; &#39;Cell Biology&#39;
+ &#39;Community-Public Health&#39; &#39;Applied Mathematics and Statistics&#39;
+ &#39;Electrical and Computer Engineering&#39; &#39;Mechanical Engineering&#39;
+ &#39;Computer Science&#39; &#39;Chemical and Biomolecular Engineering&#39;
+ &#39;Geography and Environmental Engineering&#39;]
+[&#39;Biochemistry and Molecular Biology&#39;, &#39;Biostatistics&#39;, &#39;International Health&#39;, &#39;Health Policy and Management&#39;, &#39;German and Romance Languages and Literatures&#39;, &#39;Anthropology&#39;, &#39;Political Science&#39;, &#39;Earth and Planetary Sciences&#39;, &#39;Sociology&#39;, &#39;Chemistry&#39;, &#39;Physics and Astronomy&#39;, &#39;Mathematics&#39;, &#39;Chemical Biology&#39;, &#39;Biology&#39;, &#39;History&#39;, &#39;English&#39;, &#39;Philosophy&#39;, &#39;Psychological and Brain Sciences&#39;, &#39;Molecular Biology and Genetics&#39;, &#39;Neuroscience&#39;, nan, &#39;Oncology&#39;, &#39;Biomedical Engineering&#39;, &#39;Functional Anatomy and Evolution&#39;, &#39;Biochemistry, Cellular and Molecular Biology&#39;, &#39;McKusick-Nathans Institute of Genetic Medicine&#39;, &#39;Biological Chemistry&#39;, &#39;Cellular and Molecular Medicine&#39;, &#39;Physiology&#39;, &#39;Cell Biology&#39;, &#39;Community-Public Health&#39;, &#39;Applied Mathematics and Statistics&#39;, &#39;Electrical and Computer Engineering&#39;, &#39;Mechanical Engineering&#39;, &#39;Computer Science&#39;, &#39;Chemical and Biomolecular Engineering&#39;, &#39;Geography and Environmental Engineering&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-output tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">department_counts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;degree_department&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">department_counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computer Science                                  8
+Physics and Astronomy                             7
+German and Romance Languages and Literatures      5
+Chemistry                                         5
+Biology                                           5
+Neuroscience                                      4
+Mechanical Engineering                            4
+McKusick-Nathans Institute of Genetic Medicine    4
+Political Science                                 4
+Mathematics                                       4
+Earth and Planetary Sciences                      3
+English                                           3
+Electrical and Computer Engineering               3
+Biochemistry and Molecular Biology                2
+Anthropology                                      2
+Community-Public Health                           2
+Applied Mathematics and Statistics                2
+International Health                              2
+Psychological and Brain Sciences                  2
+Biomedical Engineering                            2
+Molecular Biology and Genetics                    1
+Physiology                                        1
+Health Policy and Management                      1
+Geography and Environmental Engineering           1
+Cellular and Molecular Medicine                   1
+Sociology                                         1
+History                                           1
+Cell Biology                                      1
+Functional Anatomy and Evolution                  1
+Chemical Biology                                  1
+Biostatistics                                     1
+Biological Chemistry                              1
+Biochemistry, Cellular and Molecular Biology      1
+Philosophy                                        1
+Chemical and Biomolecular Engineering             1
+Oncology                                          1
+Name: degree_department, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Workshop home</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="basicCleanup.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2. Clean up with pandas</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Michelle Janowiecki<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

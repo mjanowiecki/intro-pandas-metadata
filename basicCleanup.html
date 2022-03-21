@@ -1,0 +1,2125 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2. Clean up with pandas &#8212; Workshop: Pandas for Metadata Transformation and Cleanup</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Merge with pandas" href="basicMerging.html" />
+    <link rel="prev" title="1. Basics of Series and DataFrames" href="basicsSeriesDataFrames.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Workshop: Pandas for Metadata Transformation and Cleanup</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Workshop home
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="basicsSeriesDataFrames.html">
+   1. Basics of
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Series
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     DataFrames
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   2. Clean up with pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basicMerging.html">
+   3. Merge with pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reshaping.html">
+   4. Reshape with pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cheatsheet.html">
+   Cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="additionalResources.html">
+   Additional resources
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/basicCleanup.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/mjanowiecki/intro-python-pandas-metadata"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mjanowiecki/intro-python-pandas-metadata/master?urlpath=tree/docs/basicCleanup.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#drop-blank-columns-or-rows">
+   Drop blank columns or rows
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#drop-duplicate-rows">
+   Drop duplicate rows
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#string-handling">
+   String handling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#putting-it-all-together">
+   Putting it all together
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2. Clean up with pandas</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#drop-blank-columns-or-rows">
+   Drop blank columns or rows
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#drop-duplicate-rows">
+   Drop duplicate rows
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#string-handling">
+   String handling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#putting-it-all-together">
+   Putting it all together
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="clean-up-with-pandas">
+<span id="clean-up"></span><h1>2. Clean up with pandas<a class="headerlink" href="#clean-up-with-pandas" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="drop-blank-columns-or-rows">
+<h2>Drop blank columns or rows<a class="headerlink" href="#drop-blank-columns-or-rows" title="Permalink to this headline">¶</a></h2>
+<p>Someone once asked if I could help clean-up an ArchivesSpace export with approximately 8000 blank rows and 70 blank columns randomly throughout the spreadsheet. Anyways, luckily pandas came to the rescue!</p>
+<p>In this example, we are first going to drop any blank column or rows from our <code class="docutils literal notranslate"><span class="pre">sampleData.csv</span></code> spreadsheet. First, let’s read our CSV as <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
+<div class="cell tag_hide-output tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;sampleData.csv&#39;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;bound method NDFrame.head of     item_identifier                   advisor                    creator  \
+0               1.0        Wolberger, Cynthia          Daniels, Casey M.   
+1               2.0  Fallin, Margaret Daniele   Collado Torres, Leonardo   
+2               3.0  Neelon, Sara E. Benjamin        Caswell, Bess L. L.   
+3               4.0           Roter, Debra L.               Jamal, Leila   
+4               5.0          Sears, Cynthia L              Rouhani, Saba   
+..              ...                       ...                        ...   
+85             86.0           Spall, James  C               Chen, Tianyi   
+86             87.0              Dredze, Mark             Benton, Adrian   
+87             87.0              Dredze, Mark             Benton, Adrian   
+88             88.0       Andreou, Andreas  G      Fischl, Kate Danielle   
+89             89.0            Shpitser, Ilya  Nabi Abdolyousefi, Razieh   
+
+   date_issued                                              title  \
+0   2015-07-31  Characterization of the ADP-ribosylated proteo...   
+1   2016-07-25  Annotation-Agnostic Differential Expression an...   
+2   2016-09-07  Child diet over three seasons in rural Zambia:...   
+3   2017-02-02  Exploring Parental Involvement in Rare Disease...   
+4   2018-05-23  Gut Microbes, Enteropathy and Child Growth: Th...   
+..         ...                                                ...   
+85  2018-08-20  A Fast Reduced-Space Algorithmic Framework for...   
+86  2018-10-25     Learning Representations of Social Media Users   
+87  2018-10-25     Learning Representations of Social Media Users   
+88  2019-05-13  Neuromorphic Models of the Amygdala with Appli...   
+89  2021-03-29  Causal Inference Methods For Bias Correction I...   
+
+                        degree_discipline  \
+0                            Biochemistry   
+1                           Biostatistics   
+2                         Human Nutrition   
+3                               Bioethics   
+4   Global Disease Epidemiology &amp; Control   
+..                                    ...   
+85                            Mathematics   
+86                       Computer Science   
+87                       Computer Science   
+88                   Computer Engineering   
+89                       Computer Science   
+
+                                       degree_grantor  \
+0   Johns Hopkins University. Bloomberg School of ...   
+1   Johns Hopkins University. Bloomberg School of ...   
+2   Johns Hopkins University. Bloomberg School of ...   
+3   Johns Hopkins University. Bloomberg School of ...   
+4   Johns Hopkins University. Bloomberg School of ...   
+..                                                ...   
+85  Johns Hopkins University. Whiting School of En...   
+86  Johns Hopkins University. Whiting School of En...   
+87  Johns Hopkins University. Whiting School of En...   
+88  Johns Hopkins University. Whiting School of En...   
+89  Johns Hopkins University. Whiting School of En...   
+
+                      degree_department  \
+0    Biochemistry and Molecular Biology   
+1                         Biostatistics   
+2                  International Health   
+3          Health Policy and Management   
+4                  International Health   
+..                                  ...   
+85   Applied Mathematics and Statistics   
+86                     Computer Science   
+87                     Computer Science   
+88  Electrical and Computer Engineering   
+89                     Computer Science   
+
+                                     committee_member  contributor_author  
+0   Leung, Anthony K. L.|Matunis, Michael J.|Dingl...                 NaN  
+1   Leek, Jeffrey T.|Hansen, Kasper D.|Battle, Ale...                 NaN  
+2   West, Keith P., Jr.|Talegawkar, Sameera|Fanzo,...                 NaN  
+3   Kass, Nancy E.|Saloner, Brendan|Bodurtha, Joan...                 NaN  
+4   Kosek, Margaret  N|Dowdy, David W|Sack, David ...                 NaN  
+..                                                ...                 ...  
+85   Basu, Amitabh|Curtis, Frank E|Robinson, Daniel P                 NaN  
+86            Arora, Raman|Yarowsky, David|Hovy, Dirk                 NaN  
+87            Arora, Raman|Yarowsky, David|Hovy, Dirk                 NaN  
+88  Etienne-Cummings, Ralph|Sarma, Sridevi|Pouliqu...                 NaN  
+89  Scharfstein, Daniel|Tchetgen Tchetgen, Eric|Og...                 NaN  
+
+[90 rows x 10 columns]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we are going to use a pandas function called <code class="docutils literal notranslate"><span class="pre">dropna()</span></code> to remove the blank columns and rows.</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dropna.html"><code class="docutils literal notranslate"><span class="pre">df.dropna()</span></code></a>: Removes missing values from the DataFrame.</p>
+</div>
+<p>In pandas, ‘na’ refers to missing values in a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> or <code class="docutils literal notranslate"><span class="pre">Series.</span></code> This includes:</p>
+<ul class="simple">
+<li><p>blanks (This is the equivalent of a blank cell in a spreadsheet.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NaN</span></code> or <code class="docutils literal notranslate"><span class="pre">nan</span></code> (This means <em>Not a Number</em>.)</p></li>
+</ul>
+<p>‘na’  does not include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (empty strings)</p></li>
+<li><p>0</p></li>
+</ul>
+<p>In this script, we are using the function <code class="docutils literal notranslate"><span class="pre">isna()</span></code> to show us which values are ‘na’. If the value is ‘na’, we will see <code class="docutils literal notranslate"><span class="pre">True</span></code> printed. If the value is not ‘na’, we will see <code class="docutils literal notranslate"><span class="pre">False</span></code> printed. There is also a function called <code class="docutils literal notranslate"><span class="pre">notna()</span></code>which returns the inverse values of <code class="docutils literal notranslate"><span class="pre">isna()</span></code>.</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.isna.html#pandas.isna"><code class="docutils literal notranslate"><span class="pre">pd.isna()</span></code></a>: Detects missing values for an array-like object.</p>
+</div>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.notna.html#pandas.notna"><code class="docutils literal notranslate"><span class="pre">pd.notna()</span></code></a>: Detects non-missing values for an array-like object.</p>
+</div>
+<div class="cell tag_hide-output tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    item_identifier  advisor  creator  date_issued  title  degree_discipline  \
+0             False    False    False        False  False              False   
+1             False    False    False        False  False              False   
+2             False    False    False        False  False              False   
+3             False    False    False        False  False              False   
+4             False    False    False        False  False              False   
+..              ...      ...      ...          ...    ...                ...   
+85            False    False    False        False  False              False   
+86            False    False    False        False  False              False   
+87            False    False    False        False  False              False   
+88            False    False    False        False  False              False   
+89            False    False    False        False  False              False   
+
+    degree_grantor  degree_department  committee_member  contributor_author  
+0            False              False             False                True  
+1            False              False             False                True  
+2            False              False             False                True  
+3            False              False             False                True  
+4            False              False             False                True  
+..             ...                ...               ...                 ...  
+85           False              False             False                True  
+86           False              False             False                True  
+87           False              False             False                True  
+88           False              False             False                True  
+89           False              False             False                True  
+
+[90 rows x 10 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<p>While this is helpful, it doesn’t show all of our rows. To see all of our data, let’s loop through the rows in our <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. To do this, we will use a function called <code class="docutils literal notranslate"><span class="pre">iterrows()</span></code>. For each loop, this function returns the <code class="docutils literal notranslate"><span class="pre">index</span></code> and the <code class="docutils literal notranslate"><span class="pre">row</span></code> as a <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.iterrows.html"><code class="docutils literal notranslate"><span class="pre">df.iterrows()</span></code></a>: Iterates over DataFrame rows as (index, Series) pairs.</p>
+</div>
+<div class="cell tag_hide-output tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">notna</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 0, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 1, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 2, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 3, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 4, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 5, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 6, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 7, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 8, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 9, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 10, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 11, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 12, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 13, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 14, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 15, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 16, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 17, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 18, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 19, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 20, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 21, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 22, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 23, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 24, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 25, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 26, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 27, dtype: bool
+item_identifier        True
+advisor               False
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 28, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 29, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 30, dtype: bool
+item_identifier        True
+advisor               False
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 31, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 32, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 33, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 34, dtype: bool
+item_identifier        True
+advisor               False
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 35, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 36, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 37, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 38, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 39, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 40, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 41, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 42, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 43, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 44, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 45, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 46, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 47, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 48, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 49, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 50, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 51, dtype: bool
+item_identifier       False
+advisor               False
+creator               False
+date_issued           False
+title                 False
+degree_discipline     False
+degree_grantor        False
+degree_department     False
+committee_member      False
+contributor_author    False
+Name: 52, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 53, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 54, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 55, dtype: bool
+item_identifier        True
+advisor               False
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 56, dtype: bool
+item_identifier        True
+advisor               False
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 57, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 58, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 59, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 60, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member      False
+contributor_author    False
+Name: 61, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 62, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 63, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 64, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 65, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 66, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 67, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 68, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 69, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 70, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 71, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 72, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 73, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 74, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 75, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 76, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 77, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 78, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 79, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 80, dtype: bool
+item_identifier        True
+advisor               False
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 81, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 82, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 83, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 84, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 85, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 86, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 87, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 88, dtype: bool
+item_identifier        True
+advisor                True
+creator                True
+date_issued            True
+title                  True
+degree_discipline      True
+degree_grantor         True
+degree_department      True
+committee_member       True
+contributor_author    False
+Name: 89, dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is more helpful! In the terminal snippet above, we see that <code class="docutils literal notranslate"><span class="pre">contributor_author</span></code> column in rows 1 and 2 are <code class="docutils literal notranslate"><span class="pre">False</span></code> or  doesn’t have a value. If we look through the rest of our terminal results, it seems like the entire <code class="docutils literal notranslate"><span class="pre">contributor_author</span></code> column is empty. We’ll want to drop this column. Also, in our terminal results we’ll notice that all of the values in row 51 are <code class="docutils literal notranslate"><span class="pre">False</span></code> or empty. We’ll want to drop that row as well.</p>
+<p>So in <code class="docutils literal notranslate"><span class="pre">df.dropna()</span></code>, we are asking to drop (or remove) all of empty rows and columns from our <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
+<p>If you look at the function <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dropna.html">guidelines</a>, you can see there are parameters to customize our use of the function.</p>
+<p>First, we can pick what axis we want to <code class="docutils literal notranslate"><span class="pre">df.dropna()</span></code> from.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">axis=0</span></code> refers to the rows</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">axis=1</span></code> refers to the columns</p></li>
+</ul>
+<p>Second, we can decide when we want to drop a row or a column from a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. We can delete a row or column when:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">how='any'</span></code> (At least one ‘na’ value is in the column or row.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">thresh=x</span></code> (At least <em>x</em> number of ‘na’ are in the column or row.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">how='all'</span></code>(All the values in the column or row are ‘na’.)</p></li>
+</ul>
+<p>Since we want to delete only columns and rows that are <strong>completely</strong> blank or empty, let’s run the function twice with the parameter <code class="docutils literal notranslate"><span class="pre">how='all'</span></code>. Once for the blank rows, and once for the blank columns.</p>
+<div class="cell tag_hide-output tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;bound method NDFrame.head of     item_identifier                   advisor                    creator  \
+0               1.0        Wolberger, Cynthia          Daniels, Casey M.   
+1               2.0  Fallin, Margaret Daniele   Collado Torres, Leonardo   
+2               3.0  Neelon, Sara E. Benjamin        Caswell, Bess L. L.   
+3               4.0           Roter, Debra L.               Jamal, Leila   
+4               5.0          Sears, Cynthia L              Rouhani, Saba   
+..              ...                       ...                        ...   
+85             86.0           Spall, James  C               Chen, Tianyi   
+86             87.0              Dredze, Mark             Benton, Adrian   
+87             87.0              Dredze, Mark             Benton, Adrian   
+88             88.0       Andreou, Andreas  G      Fischl, Kate Danielle   
+89             89.0            Shpitser, Ilya  Nabi Abdolyousefi, Razieh   
+
+   date_issued                                              title  \
+0   2015-07-31  Characterization of the ADP-ribosylated proteo...   
+1   2016-07-25  Annotation-Agnostic Differential Expression an...   
+2   2016-09-07  Child diet over three seasons in rural Zambia:...   
+3   2017-02-02  Exploring Parental Involvement in Rare Disease...   
+4   2018-05-23  Gut Microbes, Enteropathy and Child Growth: Th...   
+..         ...                                                ...   
+85  2018-08-20  A Fast Reduced-Space Algorithmic Framework for...   
+86  2018-10-25     Learning Representations of Social Media Users   
+87  2018-10-25     Learning Representations of Social Media Users   
+88  2019-05-13  Neuromorphic Models of the Amygdala with Appli...   
+89  2021-03-29  Causal Inference Methods For Bias Correction I...   
+
+                        degree_discipline  \
+0                            Biochemistry   
+1                           Biostatistics   
+2                         Human Nutrition   
+3                               Bioethics   
+4   Global Disease Epidemiology &amp; Control   
+..                                    ...   
+85                            Mathematics   
+86                       Computer Science   
+87                       Computer Science   
+88                   Computer Engineering   
+89                       Computer Science   
+
+                                       degree_grantor  \
+0   Johns Hopkins University. Bloomberg School of ...   
+1   Johns Hopkins University. Bloomberg School of ...   
+2   Johns Hopkins University. Bloomberg School of ...   
+3   Johns Hopkins University. Bloomberg School of ...   
+4   Johns Hopkins University. Bloomberg School of ...   
+..                                                ...   
+85  Johns Hopkins University. Whiting School of En...   
+86  Johns Hopkins University. Whiting School of En...   
+87  Johns Hopkins University. Whiting School of En...   
+88  Johns Hopkins University. Whiting School of En...   
+89  Johns Hopkins University. Whiting School of En...   
+
+                      degree_department  \
+0    Biochemistry and Molecular Biology   
+1                         Biostatistics   
+2                  International Health   
+3          Health Policy and Management   
+4                  International Health   
+..                                  ...   
+85   Applied Mathematics and Statistics   
+86                     Computer Science   
+87                     Computer Science   
+88  Electrical and Computer Engineering   
+89                     Computer Science   
+
+                                     committee_member  
+0   Leung, Anthony K. L.|Matunis, Michael J.|Dingl...  
+1   Leek, Jeffrey T.|Hansen, Kasper D.|Battle, Ale...  
+2   West, Keith P., Jr.|Talegawkar, Sameera|Fanzo,...  
+3   Kass, Nancy E.|Saloner, Brendan|Bodurtha, Joan...  
+4   Kosek, Margaret  N|Dowdy, David W|Sack, David ...  
+..                                                ...  
+85   Basu, Amitabh|Curtis, Frank E|Robinson, Daniel P  
+86            Arora, Raman|Yarowsky, David|Hovy, Dirk  
+87            Arora, Raman|Yarowsky, David|Hovy, Dirk  
+88  Etienne-Cummings, Ralph|Sarma, Sridevi|Pouliqu...  
+89  Scharfstein, Daniel|Tchetgen Tchetgen, Eric|Og...  
+
+[89 rows x 9 columns]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check our terminal results. We should have a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with 89 rows and 9 columns.</p>
+</div>
+<div class="section" id="drop-duplicate-rows">
+<h2>Drop duplicate rows<a class="headerlink" href="#drop-duplicate-rows" title="Permalink to this headline">¶</a></h2>
+<p>Another common problem in metadata work is duplicate rows. Sometimes, exports will produce duplicated rows and it can be really laborious to remove these manually.</p>
+<p>That’s where <code class="docutils literal notranslate"><span class="pre">drop_duplicates()</span></code> comes in. This wonderful little pandas function deletes any rows with the same exact information.</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.drop_duplicates.html"><code class="docutils literal notranslate"><span class="pre">df.drop_duplicates()</span></code></a>: Removes duplicate rows from DataFrame.</p>
+</div>
+<p>But, first let’s remind ourselves what our spreadsheet <code class="docutils literal notranslate"><span class="pre">'sampleData.csv'</span></code>currently looks like.</p>
+<div class="cell tag_hide-output tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;bound method NDFrame.head of     item_identifier                   advisor                    creator  \
+0               1.0        Wolberger, Cynthia          Daniels, Casey M.   
+1               2.0  Fallin, Margaret Daniele   Collado Torres, Leonardo   
+2               3.0  Neelon, Sara E. Benjamin        Caswell, Bess L. L.   
+3               4.0           Roter, Debra L.               Jamal, Leila   
+4               5.0          Sears, Cynthia L              Rouhani, Saba   
+..              ...                       ...                        ...   
+85             86.0           Spall, James  C               Chen, Tianyi   
+86             87.0              Dredze, Mark             Benton, Adrian   
+87             87.0              Dredze, Mark             Benton, Adrian   
+88             88.0       Andreou, Andreas  G      Fischl, Kate Danielle   
+89             89.0            Shpitser, Ilya  Nabi Abdolyousefi, Razieh   
+
+   date_issued                                              title  \
+0   2015-07-31  Characterization of the ADP-ribosylated proteo...   
+1   2016-07-25  Annotation-Agnostic Differential Expression an...   
+2   2016-09-07  Child diet over three seasons in rural Zambia:...   
+3   2017-02-02  Exploring Parental Involvement in Rare Disease...   
+4   2018-05-23  Gut Microbes, Enteropathy and Child Growth: Th...   
+..         ...                                                ...   
+85  2018-08-20  A Fast Reduced-Space Algorithmic Framework for...   
+86  2018-10-25     Learning Representations of Social Media Users   
+87  2018-10-25     Learning Representations of Social Media Users   
+88  2019-05-13  Neuromorphic Models of the Amygdala with Appli...   
+89  2021-03-29  Causal Inference Methods For Bias Correction I...   
+
+                        degree_discipline  \
+0                            Biochemistry   
+1                           Biostatistics   
+2                         Human Nutrition   
+3                               Bioethics   
+4   Global Disease Epidemiology &amp; Control   
+..                                    ...   
+85                            Mathematics   
+86                       Computer Science   
+87                       Computer Science   
+88                   Computer Engineering   
+89                       Computer Science   
+
+                                       degree_grantor  \
+0   Johns Hopkins University. Bloomberg School of ...   
+1   Johns Hopkins University. Bloomberg School of ...   
+2   Johns Hopkins University. Bloomberg School of ...   
+3   Johns Hopkins University. Bloomberg School of ...   
+4   Johns Hopkins University. Bloomberg School of ...   
+..                                                ...   
+85  Johns Hopkins University. Whiting School of En...   
+86  Johns Hopkins University. Whiting School of En...   
+87  Johns Hopkins University. Whiting School of En...   
+88  Johns Hopkins University. Whiting School of En...   
+89  Johns Hopkins University. Whiting School of En...   
+
+                      degree_department  \
+0    Biochemistry and Molecular Biology   
+1                         Biostatistics   
+2                  International Health   
+3          Health Policy and Management   
+4                  International Health   
+..                                  ...   
+85   Applied Mathematics and Statistics   
+86                     Computer Science   
+87                     Computer Science   
+88  Electrical and Computer Engineering   
+89                     Computer Science   
+
+                                     committee_member  
+0   Leung, Anthony K. L.|Matunis, Michael J.|Dingl...  
+1   Leek, Jeffrey T.|Hansen, Kasper D.|Battle, Ale...  
+2   West, Keith P., Jr.|Talegawkar, Sameera|Fanzo,...  
+3   Kass, Nancy E.|Saloner, Brendan|Bodurtha, Joan...  
+4   Kosek, Margaret  N|Dowdy, David W|Sack, David ...  
+..                                                ...  
+85   Basu, Amitabh|Curtis, Frank E|Robinson, Daniel P  
+86            Arora, Raman|Yarowsky, David|Hovy, Dirk  
+87            Arora, Raman|Yarowsky, David|Hovy, Dirk  
+88  Etienne-Cummings, Ralph|Sarma, Sridevi|Pouliqu...  
+89  Scharfstein, Daniel|Tchetgen Tchetgen, Eric|Og...  
+
+[89 rows x 9 columns]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Awesome! It currently has 89 rows and 9 columns.</p>
+<p>Ok, let’s take care of any duplicates! To start, lets check to see if our spreadsheet has duplicate rows by using the the pandas function <code class="docutils literal notranslate"><span class="pre">duplicate()</span></code>.</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.duplicated.html"><code class="docutils literal notranslate"><span class="pre">df.duplicate()</span></code></a>: Returns boolean Series denoting duplicate rows.</p>
+</div>
+<p>This function returns <code class="docutils literal notranslate"><span class="pre">Series</span></code> with the results for each row, identifying any duplicated rows as <code class="docutils literal notranslate"><span class="pre">True</span></code> and unique rows as <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Let’s try it out. We are setting the parameter <code class="docutils literal notranslate"><span class="pre">keep</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> to mark all duplicated rows, but you can also set this to <code class="docutils literal notranslate"><span class="pre">&quot;first&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;last&quot;</span></code> to mark the first or last instance of duplicate row as <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<p>Since this function returns a <code class="docutils literal notranslate"><span class="pre">Series</span></code>, we can look the results for all of the rows by looping through the <code class="docutils literal notranslate"><span class="pre">Series</span></code> (we named it <code class="docutils literal notranslate"><span class="pre">duplicates</span></code>) like a simple list using the <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> function.</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://docs.python.org/3/library/functions.html#enumerate"><code class="docutils literal notranslate"><span class="pre">enumerate()</span></code></a>: Returns a count (starting from zero) and associated value while iterating through a list-like object.</p>
+</div>
+<p>This loop prints the <code class="docutils literal notranslate"><span class="pre">count</span></code> (equivalent to our row index) and then the <code class="docutils literal notranslate"><span class="pre">row</span></code> value of the <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
+<div class="cell tag_hide-output tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duplicates</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">count</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">duplicates</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 False
+1 False
+2 False
+3 False
+4 False
+5 False
+6 False
+7 False
+8 False
+9 False
+10 False
+11 False
+12 False
+13 False
+14 False
+15 False
+16 False
+17 False
+18 False
+19 False
+20 False
+21 False
+22 False
+23 False
+24 False
+25 False
+26 False
+27 False
+28 False
+29 False
+30 False
+31 False
+32 False
+33 False
+34 False
+35 False
+36 False
+37 False
+38 False
+39 False
+40 False
+41 False
+42 False
+43 False
+44 False
+45 False
+46 False
+47 False
+48 False
+49 False
+50 False
+51 False
+52 False
+53 False
+54 False
+55 False
+56 False
+57 False
+58 False
+59 False
+60 False
+61 False
+62 False
+63 False
+64 False
+65 False
+66 False
+67 False
+68 False
+69 False
+70 False
+71 False
+72 False
+73 False
+74 False
+75 False
+76 False
+77 False
+78 False
+79 False
+80 False
+81 False
+82 False
+83 False
+84 False
+85 True
+86 True
+87 False
+88 False
+</pre></div>
+</div>
+</div>
+</div>
+<p>From this, we can see that row 85 and row 86 are both <code class="docutils literal notranslate"><span class="pre">True</span></code> or duplicated. This means we need to drop one of these rows to get rid of our duplicates.</p>
+<p>If you were especially curious, you could print out these rows to see their values.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">85</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">86</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>item_identifier                                                   87.0
+advisor                                                   Dredze, Mark
+creator                                                 Benton, Adrian
+date_issued                                                 2018-10-25
+title                   Learning Representations of Social Media Users
+degree_discipline                                     Computer Science
+degree_grantor       Johns Hopkins University. Whiting School of En...
+degree_department                                     Computer Science
+committee_member               Arora, Raman|Yarowsky, David|Hovy, Dirk
+Name: 86, dtype: object
+item_identifier                                                   87.0
+advisor                                                   Dredze, Mark
+creator                                                 Benton, Adrian
+date_issued                                                 2018-10-25
+title                   Learning Representations of Social Media Users
+degree_discipline                                     Computer Science
+degree_grantor       Johns Hopkins University. Whiting School of En...
+degree_department                                     Computer Science
+committee_member               Arora, Raman|Yarowsky, David|Hovy, Dirk
+Name: 87, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Yep, these rows are totally the same! So let’s get rid of that pesky extra row using <code class="docutils literal notranslate"><span class="pre">drop_duplicates()</span></code>!</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(88, 9)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here you can see that we now have 88 rows, not 89. Hooray!</p>
+</div>
+<div class="section" id="string-handling">
+<h2>String handling<a class="headerlink" href="#string-handling" title="Permalink to this headline">¶</a></h2>
+<p>You can also apply different functions to your DataFrame columns by using string handling. (Here’s a <a class="reference external" href="https://pandas.pydata.org/docs/reference/series.html#string-handling">full list</a> of functions from the API documentation).</p>
+<p>Let’s try using the following on our DataFrame.</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.apply.html"><code class="docutils literal notranslate"><span class="pre">Series.apply()</span></code></a>: Invoke function on values of Series.</p>
+</div>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.rstrip.html"><code class="docutils literal notranslate"><span class="pre">Series.str.rstrip()</span></code></a>: Removes trailing characters.</p>
+</div>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.zfill.html#pandas.Series.str.zfill"><code class="docutils literal notranslate"><span class="pre">Series.str.zfill(width)</span></code></a>: Pads strings with zeros.</p>
+</div>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.strip.html#pandas.Series.str.strip"><code class="docutils literal notranslate"><span class="pre">Series.str.strip()</span></code></a>: Strips whitespaces from strings.</p>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;.0&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    1.0
+1    2.0
+2    3.0
+3    4.0
+4    5.0
+Name: item_identifier, dtype: float64
+0    1.0
+1    2.0
+2    3.0
+3    4.0
+4    5.0
+Name: item_identifier, dtype: object
+0    1
+1    2
+2    3
+3    4
+4    5
+Name: item_identifier, dtype: object
+0    001
+1    002
+2    003
+3    004
+4    005
+Name: item_identifier, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    Characterization of the ADP-ribosylated proteo...
+1    Annotation-Agnostic Differential Expression an...
+2    Child diet over three seasons in rural Zambia:...
+3    Exploring Parental Involvement in Rare Disease...
+4    Gut Microbes, Enteropathy and Child Growth: Th...
+Name: title, dtype: object
+0    Characterization of the ADP-ribosylated proteo...
+1    Annotation-Agnostic Differential Expression an...
+2    Child diet over three seasons in rural Zambia:...
+3    Exploring Parental Involvement in Rare Disease...
+4    Gut Microbes, Enteropathy and Child Growth: Th...
+Name: title, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="putting-it-all-together">
+<h2>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">¶</a></h2>
+<p>Now let’s make a script that cleans up our spreadsheet and creates a new cleaned up CSV.</p>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function   </p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html"><code class="docutils literal notranslate"><span class="pre">df.to_csv()</span></code></a>: Writes the DataFrame to a CSV file.</p>
+</div>
+<div class="cell tag_hide-output tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;sampleData.csv&#39;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;.0&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;item_identifier&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;sampleData_cleaned.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;bound method NDFrame.head of    item_identifier                   advisor                    creator  \
+0              001        Wolberger, Cynthia          Daniels, Casey M.   
+1              002  Fallin, Margaret Daniele   Collado Torres, Leonardo   
+2              003  Neelon, Sara E. Benjamin        Caswell, Bess L. L.   
+3              004           Roter, Debra L.               Jamal, Leila   
+4              005          Sears, Cynthia L              Rouhani, Saba   
+..             ...                       ...                        ...   
+84             085         Gayme, Dennice F.         Hameduddin, Ismail   
+85             086           Spall, James  C               Chen, Tianyi   
+86             087              Dredze, Mark             Benton, Adrian   
+88             088       Andreou, Andreas  G      Fischl, Kate Danielle   
+89             089            Shpitser, Ilya  Nabi Abdolyousefi, Razieh   
+
+   date_issued                                              title  \
+0   2015-07-31  Characterization of the ADP-ribosylated proteo...   
+1   2016-07-25  Annotation-Agnostic Differential Expression an...   
+2   2016-09-07  Child diet over three seasons in rural Zambia:...   
+3   2017-02-02  Exploring Parental Involvement in Rare Disease...   
+4   2018-05-23  Gut Microbes, Enteropathy and Child Growth: Th...   
+..         ...                                                ...   
+84  2018-02-26                   Tackling viscoelastic turbulence   
+85  2018-08-20  A Fast Reduced-Space Algorithmic Framework for...   
+86  2018-10-25     Learning Representations of Social Media Users   
+88  2019-05-13  Neuromorphic Models of the Amygdala with Appli...   
+89  2021-03-29  Causal Inference Methods For Bias Correction I...   
+
+                        degree_discipline  \
+0                            Biochemistry   
+1                           Biostatistics   
+2                         Human Nutrition   
+3                               Bioethics   
+4   Global Disease Epidemiology &amp; Control   
+..                                    ...   
+84                 Mechanical Engineering   
+85                            Mathematics   
+86                       Computer Science   
+88                   Computer Engineering   
+89                       Computer Science   
+
+                                       degree_grantor  \
+0   Johns Hopkins University. Bloomberg School of ...   
+1   Johns Hopkins University. Bloomberg School of ...   
+2   Johns Hopkins University. Bloomberg School of ...   
+3   Johns Hopkins University. Bloomberg School of ...   
+4   Johns Hopkins University. Bloomberg School of ...   
+..                                                ...   
+84  Johns Hopkins University. Whiting School of En...   
+85  Johns Hopkins University. Whiting School of En...   
+86  Johns Hopkins University. Whiting School of En...   
+88  Johns Hopkins University. Whiting School of En...   
+89  Johns Hopkins University. Whiting School of En...   
+
+                      degree_department  \
+0    Biochemistry and Molecular Biology   
+1                         Biostatistics   
+2                  International Health   
+3          Health Policy and Management   
+4                  International Health   
+..                                  ...   
+84               Mechanical Engineering   
+85   Applied Mathematics and Statistics   
+86                     Computer Science   
+88  Electrical and Computer Engineering   
+89                     Computer Science   
+
+                                     committee_member  
+0   Leung, Anthony K. L.|Matunis, Michael J.|Dingl...  
+1   Leek, Jeffrey T.|Hansen, Kasper D.|Battle, Ale...  
+2   West, Keith P., Jr.|Talegawkar, Sameera|Fanzo,...  
+3   Kass, Nancy E.|Saloner, Brendan|Bodurtha, Joan...  
+4   Kosek, Margaret  N|Dowdy, David W|Sack, David ...  
+..                                                ...  
+84                Meneveau, Charles V.|Zaki, Tamer A.  
+85   Basu, Amitabh|Curtis, Frank E|Robinson, Daniel P  
+86            Arora, Raman|Yarowsky, David|Hovy, Dirk  
+88  Etienne-Cummings, Ralph|Sarma, Sridevi|Pouliqu...  
+89  Scharfstein, Daniel|Tchetgen Tchetgen, Eric|Og...  
+
+[88 rows x 9 columns]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Beautiful! You should have a lovely new spreadsheet called <code class="docutils literal notranslate"><span class="pre">'sampleData_cleaned.csv'</span></code> with 88 rows and 9 columns. ✨</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="basicsSeriesDataFrames.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">1. Basics of <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code></p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="basicMerging.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3. Merge with pandas</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Michelle Janowiecki<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
