@@ -1,0 +1,13 @@
+,local_identifier,variable,value
+0,geo_001,name         ,Maryland            
+1,geo_002,name         ,Maryland--Annapolis
+2,geo_003,name         ,Maryland--Baltimore
+3,geo_001,fast                       ,http://id.worldcat.org/fast/1204739
+4,geo_002,fast                       ,http://id.worldcat.org/fast/1206088
+5,geo_003,fast                       ,http://id.worldcat.org/fast/1204292
+6,geo_001, geonames                      ,http://sws.geonames.org/4361885/
+7,geo_002, geonames                      ,http://sws.geonames.org/4347242/
+8,geo_003, geonames                      ,http://sws.geonames.org/4347778/
+9,geo_001,viaf                  ,http://viaf.org/viaf/151255387
+10,geo_002,viaf                  ,http://viaf.org/viaf/123791303
+11,geo_003,viaf                  ,http://viaf.org/viaf/235452840
