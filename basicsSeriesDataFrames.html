@@ -440,7 +440,7 @@ By default, pandas assigns an <code class="docutils literal notranslate"><span c
 <ul class="simple">
 <li><p>Column labels correspond to the name of each column. They are typically a string, but can be numbers too.</p></li>
 <li><p>Most of the time, column labels of a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> are equivalent to the “column headers” (or first row) seen in most spreadsheet editors.</p></li>
-<li><p>For 4th column in our <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, the column index is <code class="docutils literal notranslate"><span class="pre">2</span></code> while the column label is “creator”.</p></li>
+<li><p>For 3rd column in our <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, the column index is <code class="docutils literal notranslate"><span class="pre">2</span></code> while the column label is “creator”.</p></li>
 </ul>
 </div>
 <div class="section" id="what-is-a-series">
@@ -720,16 +720,16 @@ By default, pandas assigns an <code class="docutils literal notranslate"><span c
 </div>
 </div>
 <p>Pandas also offers many properties to understand your <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. Let’s try them out.</p>
-<div class="admonition-new-function admonition">
-<p class="admonition-title">New function</p>
+<div class="admonition-new-property admonition">
+<p class="admonition-title">New property</p>
 <p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.columns.html"><code class="docutils literal notranslate"><span class="pre">df.columns</span></code></a>: Returns the column labels of the DataFrame.</p>
 </div>
-<div class="admonition-new-function admonition">
-<p class="admonition-title">New function</p>
+<div class="admonition-new-property admonition">
+<p class="admonition-title">New property</p>
 <p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.shape.html"><code class="docutils literal notranslate"><span class="pre">df.shape</span></code></a>: Returns a tuple (rows, columns) representing the DataFrame.</p>
 </div>
-<div class="admonition-new-function admonition">
-<p class="admonition-title">New function</p>
+<div class="admonition-new-property admonition">
+<p class="admonition-title">New property</p>
 <p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.empty.html"><code class="docutils literal notranslate"><span class="pre">df.empty</span></code></a>: Indicates if the DataFrame is empty.</p>
 </div>
 <div class="cell tag_hide-output docutils container">
@@ -1147,40 +1147,40 @@ Spanish
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computer Science                                  8
 Physics and Astronomy                             7
-Biology                                           5
-German and Romance Languages and Literatures      5
 Chemistry                                         5
-McKusick-Nathans Institute of Genetic Medicine    4
+German and Romance Languages and Literatures      5
+Biology                                           5
 Mechanical Engineering                            4
+McKusick-Nathans Institute of Genetic Medicine    4
+Neuroscience                                      4
 Political Science                                 4
 Mathematics                                       4
-Neuroscience                                      4
-Electrical and Computer Engineering               3
 English                                           3
+Electrical and Computer Engineering               3
 Earth and Planetary Sciences                      3
-Anthropology                                      2
-Applied Mathematics and Statistics                2
-Psychological and Brain Sciences                  2
-Biochemistry and Molecular Biology                2
-International Health                              2
 Biomedical Engineering                            2
+Psychological and Brain Sciences                  2
 Community-Public Health                           2
-Cellular and Molecular Medicine                   1
-Molecular Biology and Genetics                    1
-Biostatistics                                     1
-Chemical and Biomolecular Engineering             1
-Chemical Biology                                  1
-Geography and Environmental Engineering           1
-Physiology                                        1
-Cell Biology                                      1
-Health Policy and Management                      1
-Oncology                                          1
+International Health                              2
+Applied Mathematics and Statistics                2
+Biochemistry and Molecular Biology                2
+Anthropology                                      2
 Biochemistry, Cellular and Molecular Biology      1
+Molecular Biology and Genetics                    1
+Geography and Environmental Engineering           1
+Chemical and Biomolecular Engineering             1
 Philosophy                                        1
+Cell Biology                                      1
+Physiology                                        1
+Oncology                                          1
 Biological Chemistry                              1
 Functional Anatomy and Evolution                  1
-History                                           1
+Health Policy and Management                      1
+Biostatistics                                     1
+Cellular and Molecular Medicine                   1
+Chemical Biology                                  1
 Sociology                                         1
+History                                           1
 Name: degree_department, dtype: int64
 </pre></div>
 </div>
