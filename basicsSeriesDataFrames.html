@@ -440,7 +440,7 @@ By default, pandas assigns an <code class="docutils literal notranslate"><span c
 <ul class="simple">
 <li><p>Column labels correspond to the name of each column. They are typically a string, but can be numbers too.</p></li>
 <li><p>Most of the time, column labels of a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> are equivalent to the “column headers” (or first row) seen in most spreadsheet editors.</p></li>
-<li><p>For 4th column in our <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, the column index is <code class="docutils literal notranslate"><span class="pre">3</span></code> while the column label is “creator”.</p></li>
+<li><p>For 4th column in our <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, the column index is <code class="docutils literal notranslate"><span class="pre">2</span></code> while the column label is “creator”.</p></li>
 </ul>
 </div>
 <div class="section" id="what-is-a-series">
@@ -765,8 +765,8 @@ False
 </div>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row_10</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">row_10</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row_11</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">row_11</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -794,8 +794,8 @@ Name: 10, dtype: object
 </div>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row_10</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">row_10</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row_11</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">row_11</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1147,40 +1147,40 @@ Spanish
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computer Science                                  8
 Physics and Astronomy                             7
-Chemistry                                         5
 Biology                                           5
 German and Romance Languages and Literatures      5
-Mathematics                                       4
+Chemistry                                         5
 McKusick-Nathans Institute of Genetic Medicine    4
-Political Science                                 4
 Mechanical Engineering                            4
+Political Science                                 4
+Mathematics                                       4
 Neuroscience                                      4
+Electrical and Computer Engineering               3
 English                                           3
 Earth and Planetary Sciences                      3
-Electrical and Computer Engineering               3
-Community-Public Health                           2
+Anthropology                                      2
+Applied Mathematics and Statistics                2
 Psychological and Brain Sciences                  2
 Biochemistry and Molecular Biology                2
 International Health                              2
-Anthropology                                      2
-Applied Mathematics and Statistics                2
 Biomedical Engineering                            2
-Cell Biology                                      1
-Chemical and Biomolecular Engineering             1
-Health Policy and Management                      1
-Chemical Biology                                  1
-Sociology                                         1
-Functional Anatomy and Evolution                  1
-Philosophy                                        1
-History                                           1
-Biological Chemistry                              1
-Geography and Environmental Engineering           1
-Oncology                                          1
+Community-Public Health                           2
 Cellular and Molecular Medicine                   1
 Molecular Biology and Genetics                    1
-Biochemistry, Cellular and Molecular Biology      1
-Physiology                                        1
 Biostatistics                                     1
+Chemical and Biomolecular Engineering             1
+Chemical Biology                                  1
+Geography and Environmental Engineering           1
+Physiology                                        1
+Cell Biology                                      1
+Health Policy and Management                      1
+Oncology                                          1
+Biochemistry, Cellular and Molecular Biology      1
+Philosophy                                        1
+Biological Chemistry                              1
+Functional Anatomy and Evolution                  1
+History                                           1
+Sociology                                         1
 Name: degree_department, dtype: int64
 </pre></div>
 </div>
