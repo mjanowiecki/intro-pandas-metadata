@@ -11,6 +11,6 @@ df['item_identifier'] = df['item_identifier'].str.rstrip('.0')
 df['item_identifier'] = df['item_identifier'].str.zfill(3)
 df['title'] = df['title'].str.strip()
 
-print(df.head)
+print(df.head())
 
 df.to_csv('sampleData_cleaned.csv', index=False)

@@ -11,11 +11,11 @@ print(df.shape)
 print(df.empty)
 
 
-row_10 = df.loc[10]
-print(row_10)
+row_11 = df.loc[10]
+print(row_11)
 
-row_10 = df.iloc[10]
-print(row_10)
+row_11 = df.iloc[10]
+print(row_11)
 
 print(df.iloc[30:41])
 print(df.iloc[[0, 30, 60]])

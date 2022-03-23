@@ -8,6 +8,6 @@ pivot = pd.pivot_table(df_1, index='committee_member',
 
 df_p = pd.DataFrame(pivot)
 df_p = df_p.reset_index()
-print(df_p.head)
+print(df_p.head())
 
 df_p.to_csv('pivotedByCommitteeMembers.csv', index=False)
