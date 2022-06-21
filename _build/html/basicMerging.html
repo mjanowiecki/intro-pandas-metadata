@@ -1,0 +1,1148 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3. Merge with pandas &#8212; Workshop: Pandas for Metadata Transformation and Cleanup</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Reshape with pandas" href="reshaping.html" />
+    <link rel="prev" title="2. Clean up with pandas" href="basicCleanup.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Workshop: Pandas for Metadata Transformation and Cleanup</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Workshop home
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="basicsSeriesDataFrames.html">
+   1. Basics of
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Series
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     DataFrames
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basicCleanup.html">
+   2. Clean up with pandas
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   3. Merge with pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reshaping.html">
+   4. Reshape with pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cheatsheet.html">
+   Cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="additionalResources.html">
+   Additional resources
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/basicMerging.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/mjanowiecki/intro-pandas-metadata"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mjanowiecki/intro-pandas-metadata/master?urlpath=tree/docs/basicMerging.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#types-of-merges">
+   Types of merges
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#left-merge">
+     Left merge
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#right-merge">
+     Right merge
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#outer-merge">
+     Outer merge
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inner-merge">
+     Inner merge
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#repeating-keys-and-merges">
+   Repeating keys and merges
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Left merge
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Right merge
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Outer merge
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     Inner merge
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#trying-a-merge">
+   Trying a merge
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deciding-on-the-type-of-merge">
+     Deciding on the type of merge
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#writing-the-code">
+     Writing the code
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>3. Merge with pandas</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#types-of-merges">
+   Types of merges
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#left-merge">
+     Left merge
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#right-merge">
+     Right merge
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#outer-merge">
+     Outer merge
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inner-merge">
+     Inner merge
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#repeating-keys-and-merges">
+   Repeating keys and merges
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Left merge
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Right merge
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Outer merge
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     Inner merge
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#trying-a-merge">
+   Trying a merge
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deciding-on-the-type-of-merge">
+     Deciding on the type of merge
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#writing-the-code">
+     Writing the code
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="merge-with-pandas">
+<span id="merging-pd"></span><h1>3. Merge with pandas<a class="headerlink" href="#merge-with-pandas" title="Permalink to this headline">¶</a></h1>
+<p>Pandas has a lot of helpful ways to merge spreadsheets based on identifiers. In this lesson, we are going to learn how to use the pandas function <code class="docutils literal notranslate"><span class="pre">merge()</span></code> and the four basic merge types:</p>
+<ul class="simple">
+<li><p>left</p></li>
+<li><p>right</p></li>
+<li><p>outer</p></li>
+<li><p>inner</p></li>
+</ul>
+<div class="admonition-new-function admonition">
+<p class="admonition-title">New function</p>
+<p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.merge.html"><code class="docutils literal notranslate"><span class="pre">pd.merge()</span></code></a>: Merge DataFrame or named Series objects with a database-style join.</a></p>
+</div>
+<div class="section" id="types-of-merges">
+<h2>Types of merges<a class="headerlink" href="#types-of-merges" title="Permalink to this headline">¶</a></h2>
+<p>First, let’s talk about the type of merges. I find it really helpful to visualize the different types of merges, so we are going to discuss the four different types through examples. In these examples, we will merge two <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> that we are calling <code class="docutils literal notranslate"><span class="pre">frame_1</span></code> (the left frame) and <code class="docutils literal notranslate"><span class="pre">frame_2</span></code> (the right frame) using the four main types of merges: left, right, outer, and inner.</p>
+<div class="important admonition">
+<p class="admonition-title">Files</p>
+<p>You can <a class="reference download internal" download="" href="_downloads/79bf687519687fba2088d07cc31862fc/frame_1.csv"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">frame_1.csv</span> <span class="pre">here</span></code></a>.<br>
+You can <a class="reference download internal" download="" href="_downloads/a21ca2732b4e599dd7fadcd6e8fae640/frame_2.csv"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">frame_2.csv</span> <span class="pre">here</span></code></a>.</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>For now, we are just going to focus on the concepts and leave the coding for later in the lesson.</p>
+</div>
+<p>In pandas merges, which mimic traditional database merges in SQL, there will be a spreadsheet (or <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>) we consider the “left” frame and a spreadsheet that we consider the “right” frame.</p>
+<p>Selecting a frame to be “right” or “left” is arbitrary, we just have to be consistent as we consider our merges.</p>
+<p><code class="docutils literal notranslate"><span class="pre">frame_1</span></code> (the left frame)</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>title</p></th>
+<th class="text-align:left head"><p>subject_id</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Overcoming Data Challenges in Machine Translation</p></td>
+<td class="text-align:left"><p>subject_001</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Experimental Methods Towards Controlling the Glycoform</p></td>
+<td class="text-align:left"><p>subject_002</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Interactions of DNA Polymerase Theta and Ku70/80 with Oxidative DNA Damage</p></td>
+<td class="text-align:left"><p>subject_003</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Control and Learning of Dynamics in Human Movement</p></td>
+<td class="text-align:left"><p>subject_004</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Local Public Health Performance and its Impact on Population Health</p></td>
+<td class="text-align:left"><p>subject_005</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>THz and microwave spectroscopy on strongly correlated conductors</p></td>
+<td class="text-align:left"><p>subject_007</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Subjectivity in Flux: Youth in Latin American and Latino Literature</p></td>
+<td class="text-align:left"><p>subject_009</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">frame_2</span></code> (the right frame)</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>subject_id</p></th>
+<th class="text-align:left head"><p>subject</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>subject_001</p></td>
+<td class="text-align:left"><p>Machine learning</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>subject_002</p></td>
+<td class="text-align:left"><p>Biochemistry</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>subject_003</p></td>
+<td class="text-align:left"><p>DNA polymerases</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>subject_004</p></td>
+<td class="text-align:left"><p>Dynamics</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>subject_006</p></td>
+<td class="text-align:left"><p>Surgical emergencies</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>subject_007</p></td>
+<td class="text-align:left"><p>Superconductivity</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>subject_008</p></td>
+<td class="text-align:left"><p>Social conditions</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="left-merge">
+<h3>Left merge<a class="headerlink" href="#left-merge" title="Permalink to this headline">¶</a></h3>
+<p>A left merge only uses keys (i.e. identifiers) from the left frame. Similar to a SQL left outer join. What identifiers will be in the merged <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>?</p>
+<div class="toggle docutils container">
+<p>In other words, the left merge only matches on the identifiers found in the left frame:</p>
+<ul class="simple">
+<li><p>subject_001</p></li>
+<li><p>subject_002</p></li>
+<li><p>subject_003</p></li>
+<li><p>subject_004</p></li>
+<li><p>subject_005</p></li>
+<li><p>subject_007</p></li>
+<li><p>subject_009</p></li>
+</ul>
+<p>Here’s the frames merged together using a left merge.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>title</p></th>
+<th class="text-align:left head"><p>subject_id</p></th>
+<th class="text-align:left head"><p>subject</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Overcoming Data Challenges in Machine Translation</p></td>
+<td class="text-align:left"><p>subject_001</p></td>
+<td class="text-align:left"><p>Machine learning</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Experimental Methods Towards Controlling the Glycoform</p></td>
+<td class="text-align:left"><p>subject_002</p></td>
+<td class="text-align:left"><p>Biochemistry</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Interactions of DNA Polymerase Theta and Ku70/80 with Oxidative DNA Damage</p></td>
+<td class="text-align:left"><p>subject_003</p></td>
+<td class="text-align:left"><p>DNA polymerases</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Control and Learning of Dynamics in Human Movement</p></td>
+<td class="text-align:left"><p>subject_004</p></td>
+<td class="text-align:left"><p>Dynamics</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Local Public Health Performance and its Impact on Population Health</p></td>
+<td class="text-align:left"><p>subject_005</p></td>
+<td class="text-align:left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>THz and microwave spectroscopy on strongly correlated conductors</p></td>
+<td class="text-align:left"><p>subject_007</p></td>
+<td class="text-align:left"><p>Superconductivity</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Subjectivity in Flux: Youth in Latin American and Latino Literature</p></td>
+<td class="text-align:left"><p>subject_009</p></td>
+<td class="text-align:left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="right-merge">
+<h3>Right merge<a class="headerlink" href="#right-merge" title="Permalink to this headline">¶</a></h3>
+<p>A right merge only uses keys (i.e. identifiers) from the right frame. Similar to a SQL right outer join. What identifiers will be in the merged <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>?</p>
+<div class="toggle docutils container">
+<p>In other words, the right merge only matches on the identifiers found in the right frame:</p>
+<ul class="simple">
+<li><p>subject_001</p></li>
+<li><p>subject_002</p></li>
+<li><p>subject_003</p></li>
+<li><p>subject_004</p></li>
+<li><p>subject_006</p></li>
+<li><p>subject_007</p></li>
+<li><p>subject_008</p></li>
+</ul>
+<p>Here’s the frames merged together using a right merge.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>title</p></th>
+<th class="head"><p>subject_id</p></th>
+<th class="head"><p>subject</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Overcoming Data Challenges in Machine Translation</p></td>
+<td><p>subject_001</p></td>
+<td><p>Machine learning</p></td>
+</tr>
+<tr class="row-odd"><td><p>Experimental Methods Towards Controlling the Glycoform</p></td>
+<td><p>subject_002</p></td>
+<td><p>Biochemistry</p></td>
+</tr>
+<tr class="row-even"><td><p>Interactions of DNA Polymerase Theta and Ku70/80 with Oxidative DNA Damage</p></td>
+<td><p>subject_003</p></td>
+<td><p>DNA polymerases</p></td>
+</tr>
+<tr class="row-odd"><td><p>Control and Learning of Dynamics in Human Movement</p></td>
+<td><p>subject_004</p></td>
+<td><p>Dynamics</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>subject_006</p></td>
+<td><p>Surgical emergencies</p></td>
+</tr>
+<tr class="row-odd"><td><p>THz and microwave spectroscopy on strongly correlated conductors</p></td>
+<td><p>subject_007</p></td>
+<td><p>Superconductivity</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>subject_008</p></td>
+<td><p>Social conditions</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="outer-merge">
+<h3>Outer merge<a class="headerlink" href="#outer-merge" title="Permalink to this headline">¶</a></h3>
+<p>An outer merge uses union of keys from both frames. Similar to a SQL full outer join. In other words, the outer merge combines information from all identifiers in the frames. What identifiers will be in the merged <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>?</p>
+<div class="toggle docutils container">
+<p>All of them!</p>
+<ul class="simple">
+<li><p>subject_001</p></li>
+<li><p>subject_002</p></li>
+<li><p>subject_003</p></li>
+<li><p>subject_004</p></li>
+<li><p>subject_005</p></li>
+<li><p>subject_006</p></li>
+<li><p>subject_007</p></li>
+<li><p>subject_008</p></li>
+<li><p>subject_009</p></li>
+</ul>
+<p>Here’s the frames merged together using an outer merge.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>title</p></th>
+<th class="text-align:left head"><p>subject_id</p></th>
+<th class="text-align:left head"><p>subject</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Overcoming Data Challenges in Machine Translation</p></td>
+<td class="text-align:left"><p>subject_001</p></td>
+<td class="text-align:left"><p>Machine learning</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Experimental Methods Towards Controlling the Glycoform</p></td>
+<td class="text-align:left"><p>subject_002</p></td>
+<td class="text-align:left"><p>Biochemistry</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Interactions of DNA Polymerase Theta and Ku70/80 with Oxidative DNA Damage</p></td>
+<td class="text-align:left"><p>subject_003</p></td>
+<td class="text-align:left"><p>DNA polymerases</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Control and Learning of Dynamics in Human Movement</p></td>
+<td class="text-align:left"><p>subject_004</p></td>
+<td class="text-align:left"><p>Dynamics</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Local Public Health Performance and its Impact on Population Health</p></td>
+<td class="text-align:left"><p>subject_005</p></td>
+<td class="text-align:left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>THz and microwave spectroscopy on strongly correlated conductors</p></td>
+<td class="text-align:left"><p>subject_007</p></td>
+<td class="text-align:left"><p>Superconductivity</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Subjectivity in Flux: Youth in Latin American and Latino Literature</p></td>
+<td class="text-align:left"><p>subject_009</p></td>
+<td class="text-align:left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p></p></td>
+<td class="text-align:left"><p>subject_006</p></td>
+<td class="text-align:left"><p>Surgical emergencies</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p></p></td>
+<td class="text-align:left"><p>subject_008</p></td>
+<td class="text-align:left"><p>Social conditions</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="inner-merge">
+<h3>Inner merge<a class="headerlink" href="#inner-merge" title="Permalink to this headline">¶</a></h3>
+<p>An inner merge uses intersection of keys from both frames. Similar to a SQL inner join. In other words, the inner merge only matches on the identifiers found in <strong>both</strong> frames. What identifiers will be in the merged <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>?</p>
+<div class="toggle docutils container">
+<ul class="simple">
+<li><p>subject_001</p></li>
+<li><p>subject_002</p></li>
+<li><p>subject_003</p></li>
+<li><p>subject_004</p></li>
+<li><p>subject_007</p></li>
+</ul>
+<p>Here’s the frames merged together using an inner merge.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>title</p></th>
+<th class="text-align:left head"><p>subject_id</p></th>
+<th class="text-align:left head"><p>subject</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Overcoming Data Challenges in Machine Translation</p></td>
+<td class="text-align:left"><p>subject_001</p></td>
+<td class="text-align:left"><p>Machine learning</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Experimental Methods Towards Controlling the Glycoform</p></td>
+<td class="text-align:left"><p>subject_002</p></td>
+<td class="text-align:left"><p>Biochemistry</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Interactions of DNA Polymerase Theta and Ku70/80 with Oxidative DNA Damage</p></td>
+<td class="text-align:left"><p>subject_003</p></td>
+<td class="text-align:left"><p>DNA polymerases</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Control and Learning of Dynamics in Human Movement</p></td>
+<td class="text-align:left"><p>subject_004</p></td>
+<td class="text-align:left"><p>Dynamics</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>THz and microwave spectroscopy on strongly correlated conductors</p></td>
+<td class="text-align:left"><p>subject_007</p></td>
+<td class="text-align:left"><p>Superconductivity</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Here’s another way to visual these types of merges:</p>
+<img src="https://gitlab.com/mjanowiecki/python-lessons-for-librarians/-/raw/main/img/mergeTypes.png" alt="visual of merges as venn diagrams" width="450"/></div>
+</div>
+<div class="section" id="repeating-keys-and-merges">
+<h2>Repeating keys and merges<a class="headerlink" href="#repeating-keys-and-merges" title="Permalink to this headline">¶</a></h2>
+<p>Here’s a fun question. What happens during a merge when a key appears more than once in a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>?</p>
+<p>Let’s find out by merging on <code class="docutils literal notranslate"><span class="pre">department_id</span></code> for these two example <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>.</p>
+<div class="important admonition">
+<p class="admonition-title">Files</p>
+<p>You can <a class="reference download internal" download="" href="_downloads/a0a7bdb8945ca414f94e75bd1738d1ed/frame_3.csv"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">frame_3.csv</span> <span class="pre">here</span></code></a>.<br>
+You can <a class="reference download internal" download="" href="_downloads/d0d7280f674a1f94edecafd3b77e06d0/frame_4.csv"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">frame_4.csv</span> <span class="pre">here</span></code></a>.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">frame_3</span></code> (the left frame)</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>local_id</p></th>
+<th class="text-align:left head"><p>name</p></th>
+<th class="text-align:left head"><p>department_id</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>person_001</p></td>
+<td class="text-align:left"><p>Ahuja, Allie</p></td>
+<td class="text-align:left"><p>department_003</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>person_002</p></td>
+<td class="text-align:left"><p>Petrov, Stella</p></td>
+<td class="text-align:left"><p>department_003</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>person_003</p></td>
+<td class="text-align:left"><p>Chen, Rachel</p></td>
+<td class="text-align:left"><p>department_002</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>person_004</p></td>
+<td class="text-align:left"><p>Smith, Amber</p></td>
+<td class="text-align:left"><p>department_004</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">frame_4</span></code> (the right frame)</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>department_id</p></th>
+<th class="text-align:left head"><p>department_name</p></th>
+<th class="text-align:left head"><p>school</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>department_001</p></td>
+<td class="text-align:left"><p>Cognitive Science</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>department_002</p></td>
+<td class="text-align:left"><p>Near Eastern Studies</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>department_003</p></td>
+<td class="text-align:left"><p>English</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>department_004</p></td>
+<td class="text-align:left"><p>Public Health</p></td>
+<td class="text-align:left"><p>Bloomberg School of Public Health</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id1">
+<h3>Left merge<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>In the left merge, the identifiers from <code class="docutils literal notranslate"><span class="pre">frame_3</span></code>  (department_003, department_003, department_002, department_004) are all matched, in order, with the information from <code class="docutils literal notranslate"><span class="pre">frame_4</span></code>.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>local_id</p></th>
+<th class="text-align:left head"><p>name</p></th>
+<th class="text-align:left head"><p>department_id</p></th>
+<th class="text-align:left head"><p>department_name</p></th>
+<th class="text-align:left head"><p>school</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>person_001</p></td>
+<td class="text-align:left"><p>Ahuja, Allie</p></td>
+<td class="text-align:left"><p>department_003</p></td>
+<td class="text-align:left"><p>English</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>person_002</p></td>
+<td class="text-align:left"><p>Petrov, Stella</p></td>
+<td class="text-align:left"><p>department_003</p></td>
+<td class="text-align:left"><p>English</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>person_003</p></td>
+<td class="text-align:left"><p>Chen, Rachel</p></td>
+<td class="text-align:left"><p>department_002</p></td>
+<td class="text-align:left"><p>Near Eastern Studies</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>person_004</p></td>
+<td class="text-align:left"><p>Smith, Amber</p></td>
+<td class="text-align:left"><p>department_004</p></td>
+<td class="text-align:left"><p>Public Health</p></td>
+<td class="text-align:left"><p>Bloomberg School of Public Health</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id2">
+<h3>Right merge<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>In the right merge, the identifiers from <code class="docutils literal notranslate"><span class="pre">frame_4</span></code>  (department_001, department_002, department_003, department_004) are all matched, in order, with the information from <code class="docutils literal notranslate"><span class="pre">frame_3</span></code>. However, you’ll notice that department_003 repeats here too, to capture both of the matches of department_003 in <code class="docutils literal notranslate"><span class="pre">frame_3</span></code>.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>local_id</p></th>
+<th class="text-align:left head"><p>name</p></th>
+<th class="text-align:left head"><p>department_id</p></th>
+<th class="text-align:left head"><p>department_name</p></th>
+<th class="text-align:left head"><p>school</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p></p></td>
+<td class="text-align:left"><p></p></td>
+<td class="text-align:left"><p>department_001</p></td>
+<td class="text-align:left"><p>Cognitive Science</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>person_003</p></td>
+<td class="text-align:left"><p>Chen, Rachel</p></td>
+<td class="text-align:left"><p>department_002</p></td>
+<td class="text-align:left"><p>Near Eastern Studies</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>person_001</p></td>
+<td class="text-align:left"><p>Ahuja, Allie</p></td>
+<td class="text-align:left"><p>department_003</p></td>
+<td class="text-align:left"><p>English</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>person_002</p></td>
+<td class="text-align:left"><p>Petrov, Stella</p></td>
+<td class="text-align:left"><p>department_003</p></td>
+<td class="text-align:left"><p>English</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>person_004</p></td>
+<td class="text-align:left"><p>Smith, Amber</p></td>
+<td class="text-align:left"><p>department_004</p></td>
+<td class="text-align:left"><p>Public Health</p></td>
+<td class="text-align:left"><p>Bloomberg School of Public Health</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id3">
+<h3>Outer merge<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>In the outer merge, the identifiers from <code class="docutils literal notranslate"><span class="pre">frame_3</span></code> (department_003, department_003, department_002, department_004) are all matched, in order, with the information from <code class="docutils literal notranslate"><span class="pre">frame_4</span></code>. Then, the remaining identifier from <code class="docutils literal notranslate"><span class="pre">frame_4</span></code> (department_001) is added to spreadsheet but doesn’t match with anything.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>local_id</p></th>
+<th class="text-align:left head"><p>name</p></th>
+<th class="text-align:left head"><p>department_id</p></th>
+<th class="text-align:left head"><p>department_name</p></th>
+<th class="text-align:left head"><p>school</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>person_001</p></td>
+<td class="text-align:left"><p>Ahuja, Allie</p></td>
+<td class="text-align:left"><p>department_003</p></td>
+<td class="text-align:left"><p>English</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>person_002</p></td>
+<td class="text-align:left"><p>Petrov, Stella</p></td>
+<td class="text-align:left"><p>department_003</p></td>
+<td class="text-align:left"><p>English</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>person_003</p></td>
+<td class="text-align:left"><p>Chen, Rachel</p></td>
+<td class="text-align:left"><p>department_002</p></td>
+<td class="text-align:left"><p>Near Eastern Studies</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>person_004</p></td>
+<td class="text-align:left"><p>Smith, Amber</p></td>
+<td class="text-align:left"><p>department_004</p></td>
+<td class="text-align:left"><p>Public Health</p></td>
+<td class="text-align:left"><p>Bloomberg School of Public Health</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p></p></td>
+<td class="text-align:left"><p></p></td>
+<td class="text-align:left"><p>department_001</p></td>
+<td class="text-align:left"><p>Cognitive Science</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id4">
+<h3>Inner merge<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>In the inner merge,  the identifiers found in both <code class="docutils literal notranslate"><span class="pre">frame_3</span></code> and <code class="docutils literal notranslate"><span class="pre">frame_4</span></code> are matched together. This happens to be the same results as the left merge.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>local_id</p></th>
+<th class="text-align:left head"><p>name</p></th>
+<th class="text-align:left head"><p>department_id</p></th>
+<th class="text-align:left head"><p>department_name</p></th>
+<th class="text-align:left head"><p>school</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>person_001</p></td>
+<td class="text-align:left"><p>Ahuja, Allie</p></td>
+<td class="text-align:left"><p>department_003</p></td>
+<td class="text-align:left"><p>English</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>person_002</p></td>
+<td class="text-align:left"><p>Petrov, Stella</p></td>
+<td class="text-align:left"><p>department_003</p></td>
+<td class="text-align:left"><p>English</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>person_003</p></td>
+<td class="text-align:left"><p>Chen, Rachel</p></td>
+<td class="text-align:left"><p>department_002</p></td>
+<td class="text-align:left"><p>Near Eastern Studies</p></td>
+<td class="text-align:left"><p>Krieger School of Arts &amp; Sciences</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>person_004</p></td>
+<td class="text-align:left"><p>Smith, Amber</p></td>
+<td class="text-align:left"><p>department_004</p></td>
+<td class="text-align:left"><p>Public Health</p></td>
+<td class="text-align:left"><p>Bloomberg School of Public Health</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="trying-a-merge">
+<h2>Trying a merge<a class="headerlink" href="#trying-a-merge" title="Permalink to this headline">¶</a></h2>
+<p>Let’s try a merge using pandas. For this exercise, we are going to use the <code class="docutils literal notranslate"><span class="pre">sampleData_cleaned.csv</span></code> that we cleaned up previously and a spreadsheet with name authority URIs for the different Hopkins schools called <code class="docutils literal notranslate"><span class="pre">schoolURIs.csv</span></code>.</p>
+<div class="important admonition">
+<p class="admonition-title">Files</p>
+<p>You can <a class="reference download internal" download="" href="_downloads/99c5271d60dfda4ca52ed0690e2e475b/sampleData_cleaned.csv"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">sampleData_cleaned.csv</span> <span class="pre">here</span></code></a>.<br>
+You can <a class="reference download internal" download="" href="_downloads/dc33c0e0c93cf69478225d79d06d4100/schoolURIs.csv"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">schoolURIs.csv</span> <span class="pre">here</span></code></a>.</p>
+</div>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>degree_grantor</p></th>
+<th class="text-align:left head"><p>viaf</p></th>
+<th class="text-align:left head"><p>lcnaf</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Johns Hopkins University. School of Medicine</p></td>
+<td class="text-align:left"><p><a class="reference external" href="http://viaf.org/viaf/124344829">http://viaf.org/viaf/124344829</a></p></td>
+<td class="text-align:left"><p><a class="reference external" href="http://id.loc.gov/authorities/names/n81070677">http://id.loc.gov/authorities/names/n81070677</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Johns Hopkins University. Krieger School of Arts and Sciences</p></td>
+<td class="text-align:left"><p><a class="reference external" href="http://viaf.org/viaf/130409033">http://viaf.org/viaf/130409033</a></p></td>
+<td class="text-align:left"><p><a class="reference external" href="http://id.loc.gov/authorities/names/n2007184404">http://id.loc.gov/authorities/names/n2007184404</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Johns Hopkins University. Whiting School of Engineering</p></td>
+<td class="text-align:left"><p><a class="reference external" href="http://viaf.org/viaf/4816164191747718740000">http://viaf.org/viaf/4816164191747718740000</a></p></td>
+<td class="text-align:left"><p><a class="reference external" href="http://id.loc.gov/authorities/names/no2022000309">http://id.loc.gov/authorities/names/no2022000309</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Johns Hopkins University. Bloomberg School of Public Health</p></td>
+<td class="text-align:left"><p><a class="reference external" href="http://viaf.org/viaf/142356070">http://viaf.org/viaf/142356070</a></p></td>
+<td class="text-align:left"><p><a class="reference external" href="http://id.loc.gov/authorities/names/nr2001039005">http://id.loc.gov/authorities/names/nr2001039005</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="deciding-on-the-type-of-merge">
+<h3>Deciding on the type of merge<a class="headerlink" href="#deciding-on-the-type-of-merge" title="Permalink to this headline">¶</a></h3>
+<p>First, lets decide on the type of merge. If we want a spreadsheet that has all of the information from <code class="docutils literal notranslate"><span class="pre">sampleData_cleaned</span></code> with the additional location details from <code class="docutils literal notranslate"><span class="pre">schoolURIs</span></code>, what type of merge should we do? What identifier should we use?</p>
+<p>If we treat <code class="docutils literal notranslate"><span class="pre">sampleData_cleaned</span></code> as the left frame and <code class="docutils literal notranslate"><span class="pre">schoolURIs</span></code> as the right frame, we should do a <strong>left merge</strong> using the <code class="docutils literal notranslate"><span class="pre">degree_grantor</span></code> as the key.</p>
+<p>Why is this the best option? Let’s think through the results of the other merging options.</p>
+<p><strong>Right merge</strong>: If there are identifiers in the right frame that aren’t in the left frame, a right merge would <em>include</em> them and their associated data. However, we don’t need this data to meet our goal. Moreover, if there are identifiers in the left frame that aren’t in the right frame, an right merge would <em>exclude</em> them. Since we want to keep all of the data from <code class="docutils literal notranslate"><span class="pre">sampleData_cleaned</span></code>,  this isn’t a good option.</p>
+<p><strong>Outer merge</strong>: If there are identifiers in the right frame that aren’t in the left frame, an outer merge would <em>include</em> them  and their associated data. However, we don’t need this data to meet our goal.</p>
+<p><strong>Inner merge</strong>:  If there are identifiers in the left frame that aren’t in the right frame, an inner merge would <em>exclude</em> them. However, we want to keep all of the data from <code class="docutils literal notranslate"><span class="pre">sampleData_cleaned</span></code> so this isn’t a good option.</p>
+</div>
+<div class="section" id="writing-the-code">
+<h3>Writing the code<a class="headerlink" href="#writing-the-code" title="Permalink to this headline">¶</a></h3>
+<p>Let’s look more closely at the <code class="docutils literal notranslate"><span class="pre">merge()</span></code> function. The first two parameters are the left and rights objects to merge; this is where we want to put our <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>. The next parameter is the <code class="docutils literal notranslate"><span class="pre">how</span></code> parameter, and this is where we indicate what type of merge we want (<code class="docutils literal notranslate"><span class="pre">&quot;left&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;right&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;inner&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;outer&quot;</span></code>). We want <code class="docutils literal notranslate"><span class="pre">how=&quot;left&quot;</span></code> for this merge.</p>
+<p>Next, we need to use the <code class="docutils literal notranslate"><span class="pre">on</span></code> parameter to tell the function what identifier (aka column/Series) we want to merge on. We need to set this to <code class="docutils literal notranslate"><span class="pre">degree_grantor</span></code>.</p>
+<p>Finally, lets set the suffixes. These are suffixes like <code class="docutils literal notranslate"><span class="pre">_x</span></code> and <code class="docutils literal notranslate"><span class="pre">_y</span></code> that are added to your column names if you have matching column names in your two <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>. So, if you have a <code class="docutils literal notranslate"><span class="pre">Name</span></code> column in <code class="docutils literal notranslate"><span class="pre">df_1</span></code> and a <code class="docutils literal notranslate"><span class="pre">Name</span></code> column in <code class="docutils literal notranslate"><span class="pre">df_2</span></code>, the merged <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> will have columns named <code class="docutils literal notranslate"><span class="pre">Name_x</span></code> and <code class="docutils literal notranslate"><span class="pre">Name_y</span></code>. I like to set these suffixes as <code class="docutils literal notranslate"><span class="pre">_1</span></code> and <code class="docutils literal notranslate"><span class="pre">_2</span></code>.</p>
+<p>Great! Now let’s create a new CSV with our merged data.</p>
+<div class="cell tag_hide-output tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;sampleData_cleaned.csv&#39;</span><span class="p">)</span>
+<span class="n">df_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;schoolURIs.csv&#39;</span><span class="p">)</span>
+
+<span class="n">merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_1</span><span class="p">,</span> <span class="n">df_2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;degree_grantor&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">merged</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="n">merged</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;sampleData_cleaned2.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   item_identifier                   advisor                   creator  \
+0                1        Wolberger, Cynthia         Daniels, Casey M.   
+1                2  Fallin, Margaret Daniele  Collado Torres, Leonardo   
+2                3  Neelon, Sara E. Benjamin       Caswell, Bess L. L.   
+3                4           Roter, Debra L.              Jamal, Leila   
+4                5          Sears, Cynthia L             Rouhani, Saba   
+
+  date_issued                                              title  \
+0  2015-07-31  Characterization of the ADP-ribosylated proteo...   
+1  2016-07-25  Annotation-Agnostic Differential Expression an...   
+2  2016-09-07  Child diet over three seasons in rural Zambia:...   
+3  2017-02-02  Exploring Parental Involvement in Rare Disease...   
+4  2018-05-23  Gut Microbes, Enteropathy and Child Growth: Th...   
+
+                       degree_discipline  \
+0                           Biochemistry   
+1                          Biostatistics   
+2                        Human Nutrition   
+3                              Bioethics   
+4  Global Disease Epidemiology &amp; Control   
+
+                                      degree_grantor  \
+0  Johns Hopkins University. Bloomberg School of ...   
+1  Johns Hopkins University. Bloomberg School of ...   
+2  Johns Hopkins University. Bloomberg School of ...   
+3  Johns Hopkins University. Bloomberg School of ...   
+4  Johns Hopkins University. Bloomberg School of ...   
+
+                    degree_department  \
+0  Biochemistry and Molecular Biology   
+1                       Biostatistics   
+2                International Health   
+3        Health Policy and Management   
+4                International Health   
+
+                                    committee_member  \
+0  Leung, Anthony K. L.|Matunis, Michael J.|Dingl...   
+1  Leek, Jeffrey T.|Hansen, Kasper D.|Battle, Ale...   
+2  West, Keith P., Jr.|Talegawkar, Sameera|Fanzo,...   
+3  Kass, Nancy E.|Saloner, Brendan|Bodurtha, Joan...   
+4  Kosek, Margaret  N|Dowdy, David W|Sack, David ...   
+
+                             viaf  \
+0  http://viaf.org/viaf/142356070   
+1  http://viaf.org/viaf/142356070   
+2  http://viaf.org/viaf/142356070   
+3  http://viaf.org/viaf/142356070   
+4  http://viaf.org/viaf/142356070   
+
+                                              lcnaf  
+0  http://id.loc.gov/authorities/names/nr2001039005  
+1  http://id.loc.gov/authorities/names/nr2001039005  
+2  http://id.loc.gov/authorities/names/nr2001039005  
+3  http://id.loc.gov/authorities/names/nr2001039005  
+4  http://id.loc.gov/authorities/names/nr2001039005  
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="basicCleanup.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">2. Clean up with pandas</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="reshaping.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4. Reshape with pandas</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Michelle Janowiecki<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
